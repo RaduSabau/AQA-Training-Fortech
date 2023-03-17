@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void first(String[] args) {
         int studentAge = 15;
         double studentGPA = 3.45;
 
