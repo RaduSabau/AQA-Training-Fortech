@@ -11,13 +11,6 @@ import pages.TrainingPage;
 
 public class ContactPageWithPOM {
     WebDriver driver;
-    final String name = " ";
-    final String organization = "Fortech";
-    final String email = "myname@fortech.ro";
-    final String telephone = "0747761303";
-    final String message = "This is the message";
-    final String myReason = "Sponsorship";
-    final String aboutUs = "Social Media";
 
     @BeforeClass
     public void setup() {
@@ -25,14 +18,59 @@ public class ContactPageWithPOM {
         driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*").addArguments("--start-maximized=*"));
     }
 
+    //Test Contact Form with blank username field and all others valid
     @Test
-    public void testContactWithPOM() {
+    public void testContactFormWithBlankUsernameField() {
+        String emptyName = " ";
+        String organization = "Fortech";
+        String email = "myname@fortech.ro";
+        String telephone = "0345678910";
+        String message = "This is the message";
+        String myReason = "Sponsorship";
+        String aboutUs = "Social Media";
         TrainingPage trainingPage = new TrainingPage(driver);
         trainingPage.get();
         ContactPage contactPage = trainingPage.clickContactButton();
-        WebElement submitErrorMessageDisplayed = contactPage.testFillingContactForm(name,organization,email,telephone,message,myReason,aboutUs);
+        contactPage.testFillingContactForm(emptyName, organization, email, telephone, message, myReason, aboutUs);
+        WebElement submitErrorMessageDisplayed = contactPage.clickAgreeButtons();
         Assert.assertTrue(submitErrorMessageDisplayed.isDisplayed());
     }
+
+    //Test Contact Form with blank password field and all others valid
+    @Test
+    public void testContactFormWithBlankPasswordField() {
+        String name = "My Name";
+        String emptyOrganization = " ";
+        String email = "myname@fortech.ro";
+        String telephone = "0345678910";
+        String message = "This is the message";
+        String myReason = "Sponsorship";
+        String aboutUs = "Social Media";
+        TrainingPage trainingPage = new TrainingPage(driver);
+        trainingPage.get();
+        ContactPage contactPage = trainingPage.clickContactButton();
+        contactPage.testFillingContactForm(name, emptyOrganization, email, telephone, message, myReason, aboutUs);
+        WebElement submitErrorMessageDisplayed = contactPage.clickAgreeButtons();
+        Assert.assertTrue(submitErrorMessageDisplayed.isDisplayed());
+    }
+    //Test Contact Form with blank password field and all others valid
+    @Test
+    public void testContactFormWithBlankEmailField() {
+        String name = "My Name";
+        String organization = "Fortech";
+        String emptyEmail = " ";
+        String telephone = "0345678910";
+        String message = "This is the message";
+        String myReason = "Sponsorship";
+        String aboutUs = "Social Media";
+        TrainingPage trainingPage = new TrainingPage(driver);
+        trainingPage.get();
+        ContactPage contactPage = trainingPage.clickContactButton();
+        contactPage.testFillingContactForm(name, organization, emptyEmail, telephone, message, myReason, aboutUs);
+        WebElement submitErrorMessageDisplayed = contactPage.clickAgreeButtons();
+        Assert.assertTrue(submitErrorMessageDisplayed.isDisplayed());
+    }
+
 
     @AfterClass
     public void tearDown() {

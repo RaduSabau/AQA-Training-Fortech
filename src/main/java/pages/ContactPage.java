@@ -34,7 +34,7 @@ public class ContactPage extends LoadableComponent<ContactPage> {
     private WebElement collectMyDetails;
     @FindBy(name = "agree-be-contacted[]")
     private WebElement agreeToBeContacted;
-    @FindBy( xpath= "//input[@value='Submit']")
+    @FindBy(xpath = "//input[@value='Submit']")
     private WebElement submitContact;
     @FindBy(className = "wpcf7-response-output")
     private WebElement validationErrorMessage;
@@ -97,14 +97,16 @@ public class ContactPage extends LoadableComponent<ContactPage> {
     private void clickAgreeToBeContacted() {
         agreeToBeContacted.click();
     }
-    private void clickSubmitContact(){
+
+    private void clickSubmitContact() {
         submitContact.submit();
     }
+
     private WebElement elementToBeClickable(WebElement element) {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public WebElement testFillingContactForm(String name, String organization, String email, String telephone,
+    public void testFillingContactForm(String name, String organization, String email, String telephone,
                                              String message, String myReason, String aboutUs) {
         enterName(name);
         enterOrganization(organization);
@@ -113,6 +115,10 @@ public class ContactPage extends LoadableComponent<ContactPage> {
         enterMessage(message);
         enterReasonToContact(myReason);
         enterWhereHearAboutUs(aboutUs);
+
+    }
+
+    public WebElement clickAgreeButtons() {
         elementToBeClickable(collectMyDetails);
         clickCollectMyDetails();
         elementToBeClickable(agreeToBeContacted);
