@@ -107,7 +107,7 @@ public class ContactPage extends LoadableComponent<ContactPage> {
     }
 
     public void testFillingContactForm(String name, String organization, String email, String telephone,
-                                             String message, String myReason, String aboutUs) {
+                                       String message, String myReason, String aboutUs) {
         enterName(name);
         enterOrganization(organization);
         enterMyEmail(email);
@@ -124,7 +124,21 @@ public class ContactPage extends LoadableComponent<ContactPage> {
         elementToBeClickable(agreeToBeContacted);
         clickAgreeToBeContacted();
         clickSubmitContact();
+        return validationErrorMessage;
+    }
 
+
+    public WebElement clickJustConsentCollectDetailsButton() {
+        elementToBeClickable(collectMyDetails);
+        clickCollectMyDetails();
+        clickSubmitContact();
+        return validationErrorMessage;
+    }
+
+    public WebElement clickJustAgreeToBeContactedButton() {
+        elementToBeClickable(agreeToBeContacted);
+        clickAgreeToBeContacted();
+        clickSubmitContact();
         return validationErrorMessage;
     }
 }

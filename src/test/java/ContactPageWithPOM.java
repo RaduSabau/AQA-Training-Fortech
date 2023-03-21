@@ -70,7 +70,38 @@ public class ContactPageWithPOM {
         WebElement submitErrorMessageDisplayed = contactPage.clickAgreeButtons();
         Assert.assertTrue(submitErrorMessageDisplayed.isDisplayed());
     }
-
+    @Test
+    public void testContactFormWithoutAgreeToBeContactedClicked(){
+        String name = "My Name";
+        String organization = "Fortech";
+        String email = "myname@fortech.ro";
+        String telephone = "0345678910";
+        String message = "This is the message";
+        String myReason = "Sponsorship";
+        String aboutUs = "Social Media";
+        TrainingPage trainingPage = new TrainingPage(driver);
+        trainingPage.get();
+        ContactPage contactPage = trainingPage.clickContactButton();
+        contactPage.testFillingContactForm(name, organization, email, telephone, message, myReason, aboutUs);
+        WebElement submitErrorMessageDisplayed = contactPage.clickJustConsentCollectDetailsButton();
+        Assert.assertTrue(submitErrorMessageDisplayed.isDisplayed());
+    }
+    @Test
+    public void testContactFormWithoutDataConsentClicked(){
+        String name = "My Name";
+        String organization = "Fortech";
+        String email = "myname@fortech.ro";
+        String telephone = "0345678910";
+        String message = "This is the message";
+        String myReason = "Sponsorship";
+        String aboutUs = "Social Media";
+        TrainingPage trainingPage = new TrainingPage(driver);
+        trainingPage.get();
+        ContactPage contactPage = trainingPage.clickContactButton();
+        contactPage.testFillingContactForm(name, organization, email, telephone, message, myReason, aboutUs);
+        WebElement submitErrorMessageDisplayed = contactPage.clickJustAgreeToBeContactedButton();
+        Assert.assertTrue(submitErrorMessageDisplayed.isDisplayed());
+    }
 
     @AfterClass
     public void tearDown() {
