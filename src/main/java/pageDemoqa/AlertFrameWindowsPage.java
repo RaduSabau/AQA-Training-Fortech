@@ -23,7 +23,9 @@ public class AlertFrameWindowsPage {
     }
 
     public String getPageTitle() {
-        return driver.findElement(By.className("main-header")).getText();
+        WebElement pageTitle = driver.findElement(By.className("main-header"));
+        utils.waitForElementToAppear(pageTitle);
+        return pageTitle.getText();
     }
 
 }

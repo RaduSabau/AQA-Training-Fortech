@@ -15,11 +15,14 @@ public class Utils {
     public Utils(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
     }
+
 
     public WebElement findElement(WebElement element) {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+    public void waitForElementToAppear(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void switchWindow(String urlIdentifier) {
