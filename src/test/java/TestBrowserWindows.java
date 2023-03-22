@@ -19,7 +19,8 @@ public class TestBrowserWindows {
     public void setup() {
         String URL = "https://demoqa.com/";
 //        driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*").addArguments("--start-maximized=*"));
-        driver = new FirefoxDriver(new FirefoxOptions().addArguments("--start-maximized=*"));
+        driver = new FirefoxDriver();
+        driver.manage().window().maximize();
         driver.get(URL);
 
     }
