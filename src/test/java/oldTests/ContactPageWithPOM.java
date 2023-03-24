@@ -1,3 +1,5 @@
+package oldTests;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -6,8 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.ContactPage;
-import pages.TrainingPage;
+import oldPages.ContactPage;
+import oldPages.TrainingPage;
 
 public class ContactPageWithPOM {
     WebDriver driver;

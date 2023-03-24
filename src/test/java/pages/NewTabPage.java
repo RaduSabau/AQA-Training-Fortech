@@ -1,22 +1,21 @@
-package pageDemoqa;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.Utils;
 
 public class NewTabPage {
-    WebDriver driver;
-    String currentWindow;
-    private Utils utils;
+    private final WebDriver driver;
+    private final Utils utils;
 
     private String urlIdentifier = "/sample";
 
     public NewTabPage(WebDriver driver) {
         this.driver = driver;
+        utils = new Utils(driver);
     }
 
     public void switchToNewTab() {
-        Utils utils = new Utils(driver);
         utils.switchWindow(urlIdentifier);
     }
 

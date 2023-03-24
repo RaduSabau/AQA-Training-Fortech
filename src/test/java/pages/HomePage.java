@@ -1,4 +1,4 @@
-package pageDemoqa;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,12 +9,12 @@ import utils.Utils;
 
 import java.time.Duration;
 
-public class MainPage {
+public class HomePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
-    private Utils utils;
+    private final Utils utils;
 
-    public MainPage(WebDriver driver) {
+    public HomePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.utils = new Utils(driver);
@@ -24,7 +24,7 @@ public class MainPage {
         String categoryCardXpath = "//h5[contains(text(), '" + category + "')]";
         WebElement menuCategoryElement = driver.findElement(By.xpath(categoryCardXpath));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", menuCategoryElement);
-        utils.findElement(menuCategoryElement).click();
+        utils.elementClickable(menuCategoryElement).click();
     }
 
 }

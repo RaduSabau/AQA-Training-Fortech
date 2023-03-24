@@ -1,4 +1,4 @@
-package pageDemoqa;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,7 +8,7 @@ import utils.Utils;
 
 public class AlertFrameWindowsPage {
     private final WebDriver driver;
-    private Utils utils;
+    private final Utils utils;
 
     public AlertFrameWindowsPage(WebDriver driver) {
         this.driver = driver;
@@ -19,12 +19,12 @@ public class AlertFrameWindowsPage {
         String itemMenuXpath = "//span[contains(text(),'" + itemMenu + "')]";
         WebElement menuItem = driver.findElement(By.xpath(itemMenuXpath));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", menuItem);
-        utils.findElement(menuItem).click();
+        utils.elementClickable(menuItem).click();
     }
 
     public String getPageTitle() {
         WebElement pageTitle = driver.findElement(By.className("main-header"));
-        utils.waitForElementToAppear(pageTitle);
+        utils.findElement(pageTitle);
         return pageTitle.getText();
     }
 

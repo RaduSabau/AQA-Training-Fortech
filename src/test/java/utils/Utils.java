@@ -18,10 +18,11 @@ public class Utils {
     }
 
 
-    public WebElement findElement(WebElement element) {
+    public WebElement elementClickable(WebElement element) {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
-    public void waitForElementToAppear(WebElement element) {
+
+    public void findElement(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 

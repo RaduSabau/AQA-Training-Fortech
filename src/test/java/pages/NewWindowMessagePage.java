@@ -1,21 +1,19 @@
-package pageDemoqa;
+package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.Utils;
 
 public class NewWindowMessagePage {
     private final WebDriver driver;
-    private Utils utils;
-    private String urlIdentifier = "about:blank";
-    private String currentWindow;
+    private final Utils utils;
+    private final String urlIdentifier = "about:blank";
 
     public NewWindowMessagePage(WebDriver driver) {
         this.driver = driver;
+        this.utils = new Utils(driver);
     }
 
     public void switchToNewWindowMessage() {
-        Utils utils = new Utils(driver);
         utils.switchWindow(urlIdentifier);
     }
 
