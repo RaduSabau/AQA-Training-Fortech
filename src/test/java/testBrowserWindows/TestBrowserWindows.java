@@ -1,48 +1,73 @@
 package testBrowserWindows;
 
+import constants.BrowserWindowsConstants;
+import constants.CategoryConstants;
+import constants.ItemConstants;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.*;
+import pages.HomePage;
+import pages.alerts.AlertFrameWindowsPage;
+import pages.alerts.browserWindows.BrowserWindowsPage;
+import pages.alerts.browserWindows.NewTabPage;
+import pages.alerts.browserWindows.NewWindowMessagePage;
+import utils.Utils;
 
 public class TestBrowserWindows {
-    private static final String BROWSER_VALUE = "Browser Windows";
-    private static final String ELEMENT_ITEM = "Alerts, Frame & Windows";
-    private static final String TEXT_SAMPLE = "This is a sample page";
+
     private static final String MAIN_URL = "https://demoqa.com/";
-    private static final String LONG_TEXT_SAMPLE = "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.";
 
     private WebDriver driver;
 
     @BeforeClass
     public void setup() {
 //        driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*").addArguments("--start-maximized=*"));
-        driver = new FirefoxDriver();
+
+        driver = new FirefoxDriver(getFirefoxOptions());
         driver.manage().window().maximize();
         driver.get(MAIN_URL);
 
+        System.out.println(driver);
     }
+    @Test
+    public void testMe() {
+        System.out.println(driver);
+    }
+    public static FirefoxOptions getFirefoxOptions() {
+        final FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.addArguments("--disable-web-security");
+        firefoxOptions.addArguments("--allow-running-insecure-content");
 
+        final FirefoxProfile profile = new FirefoxProfile();
+        profile.setAcceptUntrustedCertificates(true);
+        profile.setAssumeUntrustedCertificateIssuer(false);
+        profile.setPreference("pageLoadStrategy", "normal");
+        profile.setPreference("intl.accept_languages", "en-GB");
+
+        firefoxOptions.setCapability(FirefoxDriver.Capability.PROFILE, profile);
+
+        return firefoxOptions;
+    }
     @Test
     public void testBrowserWindows() {
-        HomePage mainPage = new HomePage(driver);
+        HomePage homePage = new HomePage(driver);
         BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage(driver);
         AlertFrameWindowsPage alertFrameWindowsPage = new AlertFrameWindowsPage(driver);
         NewTabPage newTabPage = new NewTabPage(driver);
         NewWindowMessagePage newWindowMessagePage = new NewWindowMessagePage(driver);
 
         //Main Page - Click Alert, Frame & Windows button
-        mainPage.clickAlertFrameWindowsMenuButton(ELEMENT_ITEM);
-        Assert.assertTrue(alertFrameWindowsPage.getPageTitle().contains(ELEMENT_ITEM));
+        homePage.clickAlertFrameWindowsCategory();
+        Assert.assertTrue(alertFrameWindowsPage.getPageTitle().contains(CategoryConstants.ALERTS_FRAME_WINDOWS_CATEGORY));
 
         //Click Alert, Frame & Windows Page - Click Browser Windows button
-        alertFrameWindowsPage.chooseItemMenu(BROWSER_VALUE);
-        Assert.assertTrue(alertFrameWindowsPage.getPageTitle().contains(BROWSER_VALUE));
+        alertFrameWindowsPage.clickOnBrowserWindows();
+        Assert.assertTrue(alertFrameWindowsPage.getPageTitle().contains(ItemConstants.BROWSER_ITEM));
 
         //Browser Windows Page - Get current window
         String currentWindow = newTabPage.getCurrentWindow();
@@ -55,7 +80,7 @@ public class TestBrowserWindows {
 
         //New Tab Page - Get Text
         String newTabText = newTabPage.getNewTabText();
-        Assert.assertEquals(newTabText, TEXT_SAMPLE);
+        Assert.assertEquals(newTabText, BrowserWindowsConstants.TEXT_SAMPLE);
 
         //New Tab Page - Switch to parent window
         newTabPage.switchToParentWindow(currentWindow);
@@ -68,7 +93,7 @@ public class TestBrowserWindows {
 
         //New Window Page - Get Text
         String newWindowText = newTabPage.getNewTabText();
-        Assert.assertEquals(newWindowText, TEXT_SAMPLE);
+        Assert.assertEquals(newWindowText, BrowserWindowsConstants.TEXT_SAMPLE);
 
         //New Window Page - Switch to parent window
         newTabPage.switchToParentWindow(currentWindow);
@@ -80,7 +105,7 @@ public class TestBrowserWindows {
         newWindowMessagePage.switchToNewWindowMessage();
 
         //New Blank Page - Get URL
-        Assert.assertTrue(newWindowMessagePage.getNewWindowText().contains(LONG_TEXT_SAMPLE));
+        Assert.assertTrue(newWindowMessagePage.getNewWindowText().contains(BrowserWindowsConstants.LONG_TEXT_SAMPLE));
 
         //New Blank Page - Switch to parent window
         newTabPage.switchToParentWindow(currentWindow);
@@ -88,6 +113,11 @@ public class TestBrowserWindows {
 
     @AfterClass
     public void close() {
-        driver.quit();
+        if (driver != null) {
+            System.out.println(driver);
+            driver.quit();
+        }
+        System.out.println(driver);
     }
 }
+//taskKill /t /f /im chromedriver.exe /im chrome.exe /im geckodriver.exe

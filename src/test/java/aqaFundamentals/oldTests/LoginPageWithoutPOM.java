@@ -1,4 +1,4 @@
-package oldTests;
+package aqaFundamentals.oldTests;
 
 public class LoginPageWithoutPOM {
 

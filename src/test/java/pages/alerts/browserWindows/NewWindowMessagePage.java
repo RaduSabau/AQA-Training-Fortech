@@ -1,4 +1,4 @@
-package pages;
+package pages.alerts.browserWindows;
 
 import org.openqa.selenium.WebDriver;
 import utils.Utils;
