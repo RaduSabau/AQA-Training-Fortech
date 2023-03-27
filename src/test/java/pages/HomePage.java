@@ -1,15 +1,12 @@
 package pages;
 
+import constants.Constants;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Utils;
-
-import java.time.Duration;
 
 public class HomePage {
     private final Utils utils;
     protected WebDriver driver;
-    private static final String ALERTS_CATEGORY = "Alerts, Frame & Windows";
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -17,7 +14,21 @@ public class HomePage {
     }
 
     public void clickAlertFrameWindowsCategory() {
-        utils.clickCategory(ALERTS_CATEGORY);
+        utils.clickCategory(Constants.ALERTS_FRAME_WINDOWS_CATEGORY);
+    }
+
+    public void clickElementsCategory() {
+        utils.clickCategory(Constants.ELEMENTS_CATEGORY);
+    }
+
+    public void clickFormsCategory() {
+        utils.clickCategory(Constants.FORMS_CATEGORY);
+    }
+    public void clickWidgetsCategory() {
+        utils.clickCategory(Constants.WIDGETS_CATEGORY);
+    }
+    public void clickInteractionsCategory() {
+        utils.clickCategory(Constants.INTERACTIONS_CATEGORY);
     }
 
 }

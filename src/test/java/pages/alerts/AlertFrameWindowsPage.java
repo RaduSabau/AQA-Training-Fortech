@@ -1,5 +1,6 @@
 package pages.alerts;
 
+import constants.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,7 +8,6 @@ import utils.Utils;
 
 
 public class AlertFrameWindowsPage {
-    private static final String BROWSER_WINDOWS_ITEM = "Browser Windows";
     private final WebDriver driver;
     private final Utils utils;
 
@@ -18,7 +18,7 @@ public class AlertFrameWindowsPage {
     }
 
     public void clickOnBrowserWindows() {
-        utils.clickItemMenu(BROWSER_WINDOWS_ITEM);
+        utils.clickItemMenu(Constants.BROWSER_ITEM);
     }
 
     public String getPageTitle() {

@@ -1,58 +1,37 @@
 package testBrowserWindows;
 
-import constants.BrowserWindowsConstants;
-import constants.CategoryConstants;
-import constants.ItemConstants;
+import constants.Constants;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.alerts.AlertFrameWindowsPage;
 import pages.alerts.browserWindows.BrowserWindowsPage;
 import pages.alerts.browserWindows.NewTabPage;
 import pages.alerts.browserWindows.NewWindowMessagePage;
+import pages.elements.ElementsPage;
+import pages.elements.webTables.WebTablesPage;
 import utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class TestBrowserWindows {
 
-    private static final String MAIN_URL = "https://demoqa.com/";
-
     private WebDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void setup() {
-//        driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*").addArguments("--start-maximized=*"));
-
-        driver = new FirefoxDriver(getFirefoxOptions());
-        driver.manage().window().maximize();
-        driver.get(MAIN_URL);
-
-        System.out.println(driver);
+        driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*").addArguments("--start-maximized=*"));
+//        driver = new FirefoxDriver();
+//        driver.manage().window().maximize();
+        driver.get(Constants.MAIN_URL);
     }
-    @Test
-    public void testMe() {
-        System.out.println(driver);
-    }
-    public static FirefoxOptions getFirefoxOptions() {
-        final FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.addArguments("--disable-web-security");
-        firefoxOptions.addArguments("--allow-running-insecure-content");
 
-        final FirefoxProfile profile = new FirefoxProfile();
-        profile.setAcceptUntrustedCertificates(true);
-        profile.setAssumeUntrustedCertificateIssuer(false);
-        profile.setPreference("pageLoadStrategy", "normal");
-        profile.setPreference("intl.accept_languages", "en-GB");
-
-        firefoxOptions.setCapability(FirefoxDriver.Capability.PROFILE, profile);
-
-        return firefoxOptions;
-    }
     @Test
     public void testBrowserWindows() {
         HomePage homePage = new HomePage(driver);
@@ -60,64 +39,84 @@ public class TestBrowserWindows {
         AlertFrameWindowsPage alertFrameWindowsPage = new AlertFrameWindowsPage(driver);
         NewTabPage newTabPage = new NewTabPage(driver);
         NewWindowMessagePage newWindowMessagePage = new NewWindowMessagePage(driver);
+        Utils utils = new Utils(driver);
 
-        //Main Page - Click Alert, Frame & Windows button
+
         homePage.clickAlertFrameWindowsCategory();
-        Assert.assertTrue(alertFrameWindowsPage.getPageTitle().contains(CategoryConstants.ALERTS_FRAME_WINDOWS_CATEGORY));
+        Assert.assertTrue(utils.getPageTitle().contains(Constants.ALERTS_FRAME_WINDOWS_CATEGORY));
 
-        //Click Alert, Frame & Windows Page - Click Browser Windows button
         alertFrameWindowsPage.clickOnBrowserWindows();
-        Assert.assertTrue(alertFrameWindowsPage.getPageTitle().contains(ItemConstants.BROWSER_ITEM));
+        Assert.assertTrue(utils.getPageTitle().contains(Constants.BROWSER_ITEM));
 
-        //Browser Windows Page - Get current window
         String currentWindow = newTabPage.getCurrentWindow();
-
-        //Browser Windows Page - Click New Tab Button
         browserWindowsPage.clickNewTab();
 
-        //Browser Windows Page - Switch on New Tab Page
         newTabPage.switchToNewTab();
 
-        //New Tab Page - Get Text
         String newTabText = newTabPage.getNewTabText();
-        Assert.assertEquals(newTabText, BrowserWindowsConstants.TEXT_SAMPLE);
+        Assert.assertEquals(newTabText, Constants.TEXT_SAMPLE);
 
-        //New Tab Page - Switch to parent window
         newTabPage.switchToParentWindow(currentWindow);
 
-        //Browser Windows Page - Click New Window Button
         browserWindowsPage.clickNewWindow();
 
-        //Browser Windows Page - Switch on New Window Page
         newTabPage.switchToNewTab();
 
-        //New Window Page - Get Text
         String newWindowText = newTabPage.getNewTabText();
-        Assert.assertEquals(newWindowText, BrowserWindowsConstants.TEXT_SAMPLE);
+        Assert.assertEquals(newWindowText, Constants.TEXT_SAMPLE);
 
-        //New Window Page - Switch to parent window
         newTabPage.switchToParentWindow(currentWindow);
 
-        //Browser Windows Page - Click New Tab Button
         browserWindowsPage.clickNewWindowMessage();
 
-        //Browser Windows Page - Switch on New Blank Page
         newWindowMessagePage.switchToNewWindowMessage();
 
-        //New Blank Page - Get URL
-        Assert.assertTrue(newWindowMessagePage.getNewWindowText().contains(BrowserWindowsConstants.LONG_TEXT_SAMPLE));
+        Assert.assertTrue(newWindowMessagePage.getNewWindowText().contains(Constants.LONG_TEXT_SAMPLE));
 
-        //New Blank Page - Switch to parent window
         newTabPage.switchToParentWindow(currentWindow);
     }
 
-    @AfterClass
-    public void close() {
-        if (driver != null) {
-            System.out.println(driver);
-            driver.quit();
+    @Test
+    public void testWebTables() {
+        HomePage homePage = new HomePage(driver);
+        ElementsPage elementsPage = new ElementsPage(driver);
+        WebTablesPage webTablesPage = new WebTablesPage(driver);
+        Utils utils = new Utils(driver);
+
+        homePage.clickElementsCategory();
+        Assert.assertTrue(utils.getPageTitle().contains(Constants.ELEMENTS_CATEGORY));
+
+        elementsPage.clickOnWebTables();
+        Assert.assertTrue(utils.getPageTitle().contains(Constants.WEB_TABLES_ITEM));
+
+        webTablesPage.clickAddNewLineButton();
+
+        webTablesPage.addFirstName(Constants.FIRST_NAME);
+        webTablesPage.addLastName(Constants.LAST_NAME);
+        webTablesPage.addEmail(Constants.USER_EMAIL);
+        webTablesPage.addAge(Constants.USER_AGE);
+        webTablesPage.addSalary(Constants.USER_SALARY);
+        webTablesPage.addDepartment(Constants.DEPARTMENT);
+
+        webTablesPage.clickSubmitButton();
+
+        List<String> regData = new ArrayList<String>();
+        regData.add(Constants.FIRST_NAME);
+        regData.add(Constants.LAST_NAME);
+        regData.add(Constants.USER_EMAIL);
+        regData.add(Constants.USER_AGE);
+        regData.add(Constants.USER_SALARY);
+        regData.add(Constants.DEPARTMENT);
+        for (String value : regData){
+            Assert.assertTrue(webTablesPage.webTable.getText().contains(value));
         }
-        System.out.println(driver);
+
     }
+//    @AfterMethod
+//    public void close() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
 }
 //taskKill /t /f /im chromedriver.exe /im chrome.exe /im geckodriver.exe
