@@ -17,4 +17,8 @@ public class ElementsPage {
         utils.clickItemMenu(Constants.WEB_TABLES_ITEM);
     }
 
+    public void clickOnCheckBox() {
+        utils.clickItemMenu(Constants.CHECK_BOX_ITEM);
+    }
+
 }
