@@ -1,34 +1,34 @@
 package pages;
 
-import constants.Constants;
 import org.openqa.selenium.WebDriver;
-import utils.Utils;
+import utils.WebpageHandler;
 
 public class HomePage {
-    private final Utils utils;
+    private final WebpageHandler webpageHandler;
     protected WebDriver driver;
+    public static final String ALERTS_FRAME_WINDOWS_CATEGORY = "Alerts, Frame & Windows";
+    public static final String ELEMENTS_CATEGORY = "Elements";
+    public static final String WIDGETS_CATEGORY = "Widgets";
+    public static final String INTERACTIONS_CATEGORY = "Interactions";
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.utils = new Utils(driver);
+        this.webpageHandler = new WebpageHandler(driver);
     }
 
     public void clickAlertFrameWindowsCategory() {
-        utils.clickCategory(Constants.ALERTS_FRAME_WINDOWS_CATEGORY);
+        webpageHandler.clickCategory(ALERTS_FRAME_WINDOWS_CATEGORY);
     }
 
     public void clickElementsCategory() {
-        utils.clickCategory(Constants.ELEMENTS_CATEGORY);
+        webpageHandler.clickCategory(ELEMENTS_CATEGORY);
     }
 
-    public void clickFormsCategory() {
-        utils.clickCategory(Constants.FORMS_CATEGORY);
-    }
     public void clickWidgetsCategory() {
-        utils.clickCategory(Constants.WIDGETS_CATEGORY);
+        webpageHandler.clickCategory(WIDGETS_CATEGORY);
     }
     public void clickInteractionsCategory() {
-        utils.clickCategory(Constants.INTERACTIONS_CATEGORY);
+        webpageHandler.clickCategory(INTERACTIONS_CATEGORY);
     }
 
 }

@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.Utils;
+import utils.WebpageHandler;
 
 public class WebTablesPage {
     private final WebDriver driver;
-    private final Utils utils;
+    private final WebpageHandler webpageHandler;
     @FindBy(id = "firstName")
     public WebElement firstNameInputField;
     @FindBy(className = "rt-table")
@@ -31,70 +31,74 @@ public class WebTablesPage {
 
     public WebTablesPage(WebDriver driver) {
         this.driver = driver;
-        this.utils = new Utils(driver);
+        this.webpageHandler = new WebpageHandler(driver);
         PageFactory.initElements(driver, this);
     }
 
     public void clickAddNewLineButton() {
-        utils.elementClickable(addNewLineButton).click();
+        webpageHandler.elementClickable(addNewLineButton).click();
     }
 
     public void addFirstName(String firstName) {
-        utils.findElement(firstNameInputField);
+        webpageHandler.findElement(firstNameInputField);
+        firstNameInputField.clear();
         firstNameInputField.sendKeys(firstName);
     }
 
+
     public void addLastName(String lastName) {
-        utils.findElement(lastNameInputField);
+        webpageHandler.findElement(lastNameInputField);
+        lastNameInputField.clear();
         lastNameInputField.sendKeys(lastName);
     }
 
     public void addEmail(String email) {
-        utils.findElement(userEmailInputField);
+        webpageHandler.findElement(userEmailInputField);
+        userEmailInputField.clear();
         userEmailInputField.sendKeys(email);
     }
 
-    public void addAge(String age) {
-        utils.findElement(ageInputField);
-        ageInputField.sendKeys(age);
+    public void addAge(int age) {
+        webpageHandler.findElement(ageInputField);
+        ageInputField.clear();
+        ageInputField.sendKeys(String.valueOf(age));
     }
 
-    public void addSalary(String salary) {
-        utils.findElement(salaryInputField);
-        salaryInputField.sendKeys(salary);
+    public void addSalary(int salary) {
+        webpageHandler.findElement(salaryInputField);
+        salaryInputField.clear();
+        salaryInputField.sendKeys(String.valueOf(salary));
     }
 
     public void addDepartment(String department) {
-        utils.findElement(departmentInputField);
+        webpageHandler.findElement(departmentInputField);
+        departmentInputField.clear();
         departmentInputField.sendKeys(department);
     }
 
     public void clickSubmitButton() {
-        utils.elementClickable(submitButton).click();
+        webpageHandler.elementClickable(submitButton).click();
     }
 
     public void clickDeleteLineButton(String firstName) {
         String deleteButtonXpath = "//div[contains(text(),'" + firstName + "')]//following-sibling::div/div/span[@title='Delete']";
-        WebElement deleteWebTableLineButton = driver.findElement(By.xpath(deleteButtonXpath));
-        utils.elementClickable(deleteWebTableLineButton).click();
+        clickWebElement(deleteButtonXpath);
     }
 
     public void clickEditLineButton(String firstName) {
         String editButtonXpath = "//div[contains(text(),'" + firstName + "')]//following-sibling::div/div/span[@title='Edit']";
-        WebElement editWebTableLineButton = driver.findElement(By.xpath(editButtonXpath));
-        utils.elementClickable(editWebTableLineButton).click();
+        clickWebElement(editButtonXpath);
     }
 
-    public void editSalary(String newSalary) {
-        utils.findElement(salaryInputField);
-        salaryInputField.clear();
-        salaryInputField.sendKeys(newSalary);
+    private void clickWebElement(String categoryCardXpath) {
+        WebElement webElement = driver.findElement(By.xpath(categoryCardXpath));
+        webpageHandler.elementClickable(webElement).click();
     }
 
-    public String checkAgeWebTableLine(String firstName) {
+    public String getAgeWebTableLine(String firstName) {
         String webTableLineXpath = "//div[contains(text(),'" + firstName + "')]//ancestor::div[@class='rt-tr-group']";
         WebElement webTableLine = driver.findElement(By.xpath(webTableLineXpath));
-        utils.findElement(webTableLine);
+        webpageHandler.findElement(webTableLine);
         return webTableLine.getText();
     }
 }

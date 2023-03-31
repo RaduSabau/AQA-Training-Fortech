@@ -1,30 +1,25 @@
 package pages.alerts;
 
-import constants.Constants;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import utils.Utils;
+import utils.WebpageHandler;
 
 
 public class AlertFrameWindowsPage {
-    private final WebDriver driver;
-    private final Utils utils;
-
+    private final WebpageHandler webpageHandler;
+    public static final String BROWSER_ITEM = "Browser Windows";
+    public static final String NESTED_FRAMES_ITEM = "Nested Frames";
 
     public AlertFrameWindowsPage(WebDriver driver) {
-        this.driver = driver;
-        this.utils = new Utils(driver);
+        this.webpageHandler = new WebpageHandler(driver);
     }
 
     public void clickOnBrowserWindows() {
-        utils.clickItemMenu(Constants.BROWSER_ITEM);
+        webpageHandler.clickItemMenu(BROWSER_ITEM);
     }
 
-    public String getPageTitle() {
-        WebElement pageTitle = driver.findElement(By.className("main-header"));
-        utils.findElement(pageTitle);
-        return pageTitle.getText();
+    public void clickOnNestedFrames() {
+        webpageHandler.clickItemMenu(NESTED_FRAMES_ITEM);
     }
+
 
 }

@@ -1,62 +1,47 @@
 package utils;
 
-import constants.Constants;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import entities.Employee;
 
-import java.time.Duration;
-import java.util.Set;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Arrays;
+import java.util.List;
 
 public class Utils {
-    WebDriverWait wait;
-    WebDriver driver;
+    public static List<String> userList;
+    public static List<Employee> employeeList;
+    static String localDir = System.getProperty("user.dir");
+    static File file = new File(localDir + "/src/test/resources/testdata/testdata.txt");
+    static BufferedReader br;
 
-    public Utils(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
-
-    public WebElement elementClickable(WebElement element) {
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public void findElement(WebElement element) {
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public void clickItemMenu(String itemMenu) {
-        String itemMenuXpath = "//span[contains(text(),'" + itemMenu + "')]";
-        WebElement menuItem = driver.findElement(By.xpath(itemMenuXpath));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", menuItem);
-        elementClickable(menuItem).click();
-    }
-
-    public void clickCategory(String category) {
-        String categoryCardXpath = "//h5[contains(text(), '" + category + "')]";
-        WebElement menuCategoryElement = driver.findElement(By.xpath(categoryCardXpath));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", menuCategoryElement);
-        elementClickable(menuCategoryElement).click();
-    }
-
-    public void switchWindow(String urlIdentifier) {
-        Set<String> windows = driver.getWindowHandles();
-        for (String window : windows) {
-            driver.switchTo().window(window);
-            if (driver.getCurrentUrl().contains(urlIdentifier))
-                break;
+    public void readFile() {
+        try {
+            br = new BufferedReader(new FileReader(file));
+            userList = br.lines().toList();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public String getPageTitle() {
-        WebElement pageTitle = driver.findElement(By.className(Constants.PAGE_TITLE_CLASS_NAME));
-        findElement(pageTitle);
-        return pageTitle.getText();
+    public Employee getEmployee(int row) {
+        return Employee.builder().withFirstName(getStringToList(row).get(0))
+                .withLastName(getStringToList(row).get(1))
+                .withEmail(getStringToList(row).get(2))
+                .withAge(Integer.valueOf(getStringToList(row).get(3)))
+                .withSalary(Integer.valueOf(getStringToList(row).get(4)))
+                .withDepartment(getStringToList(row).get(5))
+                .build();
     }
 
+    public List<String> getStringToList(int row) {
+        String[] str;
+        try {
+            str = userList.get(row).split(" ");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return Arrays.asList(str);
+    }
 }
-
-

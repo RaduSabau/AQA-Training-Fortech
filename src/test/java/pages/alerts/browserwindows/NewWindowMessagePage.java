@@ -1,20 +1,20 @@
-package pages.alerts.browserWindows;
+package pages.alerts.browserwindows;
 
 import org.openqa.selenium.WebDriver;
-import utils.Utils;
+import utils.WebpageHandler;
 
 public class NewWindowMessagePage {
     private final WebDriver driver;
-    private final Utils utils;
+    private final WebpageHandler webpageHandler;
     private final String urlIdentifier = "about:blank";
 
     public NewWindowMessagePage(WebDriver driver) {
         this.driver = driver;
-        this.utils = new Utils(driver);
+        this.webpageHandler = new WebpageHandler(driver);
     }
 
     public void switchToNewWindowMessage() {
-        utils.switchWindow(urlIdentifier);
+        webpageHandler.switchWindow(urlIdentifier);
     }
 
     public String getNewWindowText() {

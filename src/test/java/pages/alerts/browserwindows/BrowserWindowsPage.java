@@ -1,13 +1,13 @@
-package pages.alerts.browserWindows;
+package pages.alerts.browserwindows;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.Utils;
+import utils.WebpageHandler;
 
 public class BrowserWindowsPage {
-    private final Utils utils;
+    private final WebpageHandler webpageHandler;
 
     @FindBy(id = "tabButton")
     private WebElement newTabButton;
@@ -21,20 +21,20 @@ public class BrowserWindowsPage {
     private WebElement newWindowMessageText;
 
     public BrowserWindowsPage(WebDriver driver) {
-        this.utils = new Utils(driver);
+        this.webpageHandler = new WebpageHandler(driver);
         PageFactory.initElements(driver, this);
     }
 
     public void clickNewTab() {
-        utils.elementClickable(newTabButton).click();
+        webpageHandler.elementClickable(newTabButton).click();
     }
 
     public void clickNewWindow() {
-        utils.elementClickable(newWindowButton).click();
+        webpageHandler.elementClickable(newWindowButton).click();
     }
 
     public void clickNewWindowMessage() {
-        utils.elementClickable(newWindowMessageButton).click();
+        webpageHandler.elementClickable(newWindowMessageButton).click();
     }
 
 }
