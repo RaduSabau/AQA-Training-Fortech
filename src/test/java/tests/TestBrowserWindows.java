@@ -6,7 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.HomePage;
-import pages.alerts.AlertFrameWindowsPage;
+import pages.alerts.MenuAlertFrameWindowsPage;
 import pages.alerts.browserwindows.BrowserWindowsPage;
 import pages.alerts.browserwindows.NewTabPage;
 import pages.alerts.browserwindows.NewWindowMessagePage;
@@ -40,8 +40,8 @@ public class TestBrowserWindows {
         new HomePage(driver).clickAlertFrameWindowsCategory();
         Assert.assertTrue(webpageHandler.getPageTitle().contains(HomePage.ALERTS_FRAME_WINDOWS_CATEGORY));
 
-        new AlertFrameWindowsPage(driver).clickOnBrowserWindows();
-        Assert.assertTrue(webpageHandler.getPageTitle().contains(AlertFrameWindowsPage.BROWSER_ITEM));
+        new MenuAlertFrameWindowsPage(driver).clickOnBrowserWindows();
+        Assert.assertTrue(webpageHandler.getPageTitle().contains(MenuAlertFrameWindowsPage.BROWSER_ITEM));
 
         String currentWindow = newTabPage.getCurrentWindow();
         browserWindowsPage.clickNewTab();

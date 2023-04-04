@@ -1,6 +1,6 @@
 package utils;
 
-import entities.Employee;
+import entities.webtables.Employee;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,36 +12,18 @@ import java.util.List;
 public class Utils {
     public static List<String> userList;
     public static List<Employee> employeeList;
-    static String localDir = System.getProperty("user.dir");
-    static File file = new File(localDir + "/src/test/resources/testdata/testdata.txt");
-    static BufferedReader br;
 
-    public void readFile() {
+
+    public List<String> readFileToList(File file) {
         try {
-            br = new BufferedReader(new FileReader(file));
-            userList = br.lines().toList();
+            return new BufferedReader(new FileReader(file)).lines().toList();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public Employee getEmployee(int row) {
-        return Employee.builder().withFirstName(getStringToList(row).get(0))
-                .withLastName(getStringToList(row).get(1))
-                .withEmail(getStringToList(row).get(2))
-                .withAge(Integer.valueOf(getStringToList(row).get(3)))
-                .withSalary(Integer.valueOf(getStringToList(row).get(4)))
-                .withDepartment(getStringToList(row).get(5))
-                .build();
+    public List<String> getListFromRow(String value) {
+        return Arrays.asList(value.split(";"));
     }
 
-    public List<String> getStringToList(int row) {
-        String[] str;
-        try {
-            str = userList.get(row).split(" ");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return Arrays.asList(str);
-    }
 }

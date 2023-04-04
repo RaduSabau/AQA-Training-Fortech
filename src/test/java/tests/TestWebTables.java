@@ -1,7 +1,8 @@
 package tests;
 
-import entities.Employee;
-import entities.Employees;
+import entities.practiceform.Student;
+import entities.webtables.Employee;
+import entities.webtables.Employees;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,7 +21,6 @@ import java.util.List;
 
 import static constants.Constants.*;
 import static utils.Utils.employeeList;
-import static utils.Utils.userList;
 
 
 public class TestWebTables {
@@ -28,18 +28,13 @@ public class TestWebTables {
     protected WebDriver driver;
     private WebTablesPage webTablesPage;
     private WebpageHandler webpageHandler;
-    private Utils utils;
 
     private static ChromeOptions getChromeOptions() {
         return new ChromeOptions()
 //                .addArguments("--window-size=1920, 1080")
 //                .addArguments("--disable-gpu")
 //                .addArguments("--headless")
-                .addArguments("disable-infobars")
-                .addArguments("--start-maximized")
-                .addArguments("--remote-allow-origins=*")
-                .addArguments("--disable-extensions")
-                .addArguments("--no-sandbox");
+                .addArguments("disable-infobars").addArguments("--start-maximized").addArguments("--remote-allow-origins=*").addArguments("--disable-extensions").addArguments("--no-sandbox");
     }
 
     private static List<String> getStrings() {
@@ -48,7 +43,7 @@ public class TestWebTables {
             add(LAST_NAME);
             add(USER_EMAIL);
             add(String.valueOf(USER_AGE));
-            add(USER_SALARY);
+            add(String.valueOf(USER_SALARY));
             add(DEPARTMENT);
         }};
     }
@@ -61,11 +56,11 @@ public class TestWebTables {
         driver.get(MAIN_URL);
         webTablesPage = new WebTablesPage(driver);
         webpageHandler = new WebpageHandler(driver);
-        utils = new Utils();
+        Utils utils = new Utils();
     }
 
     @Test
-    public void testWebTable() throws Exception {
+    public void testWebTable() {
 
         new HomePage(driver).clickElementsCategory();
         Assert.assertTrue(webpageHandler.getPageTitle().contains(HomePage.ELEMENTS_CATEGORY));
@@ -73,36 +68,36 @@ public class TestWebTables {
         new MenuElements(driver).clickOnWebTables();
         Assert.assertTrue(webpageHandler.getPageTitle().contains(MenuElements.WEB_TABLES_ITEM));
 
-        utils.readFile();
-        employeeList = new ArrayList<>();
-        for (int i = 0; i < userList.size(); i++) {
-            employeeList.add(utils.getEmployee(i));
-        }
-        Employees employees = Employees.builder().withEmployees(employeeList).build();
+        List<String> testData = new Utils().readFileToList(employeesfile);
+        List<Employee> employeesList = new ArrayList<>();
 
-        for (Employee user : employees.getEmployees()) {
+        for (String data : testData) {
+            employeesList.add(webTablesPage.getEmployee(data));
+        }
+        Employees employees = Employees.builder().withEmployees(employeesList).build();
+
+        for (Employee employee : employees.getEmployees()) {
             webTablesPage.clickAddNewLineButton();
 
-            webTablesPage.addFirstName(user.getFirstName());
-            webTablesPage.addLastName(user.getLastName());
-            webTablesPage.addEmail(user.getEmail());
-            webTablesPage.addAge(user.getAge());
-            webTablesPage.addSalary(user.getSalary());
-            webTablesPage.addDepartment(user.getDepartment());
+            webTablesPage.addFirstName(employee.getFirstName());
+            webTablesPage.addLastName(employee.getLastName());
+            webTablesPage.addEmail(employee.getEmail());
+            webTablesPage.addAge(employee.getAge());
+            webTablesPage.addSalary(employee.getSalary());
+            webTablesPage.addDepartment(employee.getDepartment());
 
             webTablesPage.clickSubmitButton();
         }
 
         getStrings().forEach(v -> Assert.assertTrue(webTablesPage.webTable.getText().contains(v)));
 
-        webTablesPage.clickDeleteLineButton(FIRST_NAME_TO_DELETE);
-        Assert.assertFalse(webTablesPage.webTable.getText().contains(FIRST_NAME_TO_DELETE));
-
         webTablesPage.clickEditLineButton(FIRST_NAME_TO_EDIT);
         webTablesPage.addSalary(USER_NEW_SALARY);
         webTablesPage.clickSubmitButton();
         Assert.assertTrue(webTablesPage.getAgeWebTableLine(FIRST_NAME_TO_EDIT).contains(String.valueOf(USER_NEW_SALARY)));
 
+        webTablesPage.clickDeleteLineButton(FIRST_NAME_TO_DELETE);
+        Assert.assertFalse(webTablesPage.webTable.getText().contains(FIRST_NAME_TO_DELETE));
     }
 
     @AfterClass

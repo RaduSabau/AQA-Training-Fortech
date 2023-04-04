@@ -4,12 +4,13 @@ import org.openqa.selenium.WebDriver;
 import utils.WebpageHandler;
 
 public class HomePage {
-    private final WebpageHandler webpageHandler;
-    protected WebDriver driver;
     public static final String ALERTS_FRAME_WINDOWS_CATEGORY = "Alerts, Frame & Windows";
     public static final String ELEMENTS_CATEGORY = "Elements";
+    public static final String FORMS_CATEGORY = "Forms";
     public static final String WIDGETS_CATEGORY = "Widgets";
     public static final String INTERACTIONS_CATEGORY = "Interactions";
+    private final WebpageHandler webpageHandler;
+    protected WebDriver driver;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -24,9 +25,14 @@ public class HomePage {
         webpageHandler.clickCategory(ELEMENTS_CATEGORY);
     }
 
+    public void clickFormsCategory() {
+        webpageHandler.clickCategory(FORMS_CATEGORY);
+    }
+
     public void clickWidgetsCategory() {
         webpageHandler.clickCategory(WIDGETS_CATEGORY);
     }
+
     public void clickInteractionsCategory() {
         webpageHandler.clickCategory(INTERACTIONS_CATEGORY);
     }

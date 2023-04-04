@@ -1,9 +1,9 @@
-package entities;
+package entities.webtables;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder(setterPrefix = "with")
 public class Employee {
     private String firstName;
@@ -12,4 +12,5 @@ public class Employee {
     private Integer age;
     private Integer salary;
     private String department;
+
 }

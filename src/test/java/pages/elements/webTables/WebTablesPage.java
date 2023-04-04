@@ -1,10 +1,12 @@
 package pages.elements.webTables;
 
+import entities.webtables.Employee;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.Utils;
 import utils.WebpageHandler;
 
 public class WebTablesPage {
@@ -100,5 +102,16 @@ public class WebTablesPage {
         WebElement webTableLine = driver.findElement(By.xpath(webTableLineXpath));
         webpageHandler.findElement(webTableLine);
         return webTableLine.getText();
+    }
+
+    public Employee getEmployee(String value) {
+        Utils utils = new Utils();
+        return Employee.builder().withFirstName(utils.getListFromRow(value).get(0))
+                .withLastName(utils.getListFromRow(value).get(1))
+                .withEmail(utils.getListFromRow(value).get(2))
+                .withAge(Integer.valueOf(utils.getListFromRow(value).get(3)))
+                .withSalary(Integer.valueOf(utils.getListFromRow(value).get(4)))
+                .withDepartment(utils.getListFromRow(value).get(5))
+                .build();
     }
 }

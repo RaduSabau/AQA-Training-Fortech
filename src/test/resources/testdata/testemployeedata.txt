@@ -1,0 +1,3 @@
+John;Malkovich;johndoe@gmail.com;35;30000;Tech
+Jane;Doe;jane@email.com;26;50000;Safety
+Jane;Doe;jane@email.com;26;50000;Safety

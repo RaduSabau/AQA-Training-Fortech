@@ -9,7 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.alerts.AlertFrameWindowsPage;
+import pages.alerts.MenuAlertFrameWindowsPage;
 import pages.alerts.NestedFrames.NestedFramesPage;
 import utils.WebpageHandler;
 
@@ -33,8 +33,8 @@ public class TestNestedFrames {
         new HomePage(driver).clickAlertFrameWindowsCategory();
         Assert.assertTrue(webpageHandler.getPageTitle().contains(HomePage.ALERTS_FRAME_WINDOWS_CATEGORY));
 
-        new AlertFrameWindowsPage(driver).clickOnNestedFrames();
-        Assert.assertTrue(webpageHandler.getPageTitle().contains(AlertFrameWindowsPage.NESTED_FRAMES_ITEM));
+        new MenuAlertFrameWindowsPage(driver).clickOnNestedFrames();
+        Assert.assertTrue(webpageHandler.getPageTitle().contains(MenuAlertFrameWindowsPage.NESTED_FRAMES_ITEM));
 
         nestedFramesPage.switchToParentFrame();
         Assert.assertEquals(nestedFramesPage.frameText(),Constants.PARENT_FRAME_TEXT);

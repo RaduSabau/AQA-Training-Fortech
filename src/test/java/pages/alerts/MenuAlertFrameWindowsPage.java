@@ -4,12 +4,12 @@ import org.openqa.selenium.WebDriver;
 import utils.WebpageHandler;
 
 
-public class AlertFrameWindowsPage {
+public class MenuAlertFrameWindowsPage {
     private final WebpageHandler webpageHandler;
     public static final String BROWSER_ITEM = "Browser Windows";
     public static final String NESTED_FRAMES_ITEM = "Nested Frames";
 
-    public AlertFrameWindowsPage(WebDriver driver) {
+    public MenuAlertFrameWindowsPage(WebDriver driver) {
         this.webpageHandler = new WebpageHandler(driver);
     }
 
