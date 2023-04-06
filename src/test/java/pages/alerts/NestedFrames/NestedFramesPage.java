@@ -10,11 +10,11 @@ public class NestedFramesPage {
     private final WebDriver driver;
     private final WebpageHandler webpageHandler;
 
-    @FindBy(id="frame1")
+    @FindBy(id = "frame1")
     private WebElement parentFrame;
-    @FindBy(xpath="//html/body")
+    @FindBy(xpath = "//html/body")
     private WebElement frameTextElement;
-    @FindBy(xpath="//iframe[@srcdoc]")
+    @FindBy(xpath = "//iframe[@srcdoc]")
     private WebElement innerFrame;
 
     public NestedFramesPage(WebDriver driver) {
@@ -22,14 +22,20 @@ public class NestedFramesPage {
         this.webpageHandler = new WebpageHandler(driver);
         PageFactory.initElements(driver, this);
     }
-    public void switchToParentFrame(){
-        driver.switchTo().frame(parentFrame);
+
+    public void switchToFrame(WebElement element) {
+        driver.switchTo().frame(element);
     }
-    public String frameText(){
-        webpageHandler.findElement(frameTextElement);
-        return frameTextElement.getText();
+
+    public void switchToParentFrame() {
+        switchToFrame(parentFrame);
     }
-    public void switchToInnerFrame(){
-        driver.switchTo().frame(innerFrame);
+
+    public String frameText() {
+        return webpageHandler.findElement(frameTextElement).getText();
+    }
+
+    public void switchToInnerFrame() {
+        switchToFrame(innerFrame);
     }
 }

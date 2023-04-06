@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import utils.WebpageHandler;
 
 public class NewWindowMessagePage {
+    private static final String urlIdentifier = "about:blank";
     private final WebDriver driver;
     private final WebpageHandler webpageHandler;
-    private final String urlIdentifier = "about:blank";
 
     public NewWindowMessagePage(WebDriver driver) {
         this.driver = driver;

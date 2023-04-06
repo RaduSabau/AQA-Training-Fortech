@@ -1,53 +1,54 @@
 package tests;
 
-import constants.Constants;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.elements.MenuElements;
 import pages.elements.checkBox.CheckBoxPage;
 import utils.WebpageHandler;
 
-public class TestCheckBox {
-    private WebDriver driver;
-    private WebpageHandler webpageHandler;
-    private CheckBoxPage checkBoxPage;
+import static constants.Constants.*;
 
-    @BeforeClass
-    public void setup() {
-        driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*").addArguments("--start-maximized=*"));
-//        driver = new FirefoxDriver();
-//        driver.manage().window().maximize();
-        driver.get(Constants.MAIN_URL);
-        webpageHandler = new WebpageHandler(driver);
-        checkBoxPage = new CheckBoxPage(driver);
-    }
+
+public class TestCheckBox extends MainPage {
 
     @Test
     public void testCheckBox() {
+        WebpageHandler webpageHandler = new WebpageHandler(driver);
+        CheckBoxPage checkBoxPage = new CheckBoxPage(driver);
+
         new HomePage(driver).clickElementsCategory();
         Assert.assertTrue(webpageHandler.getPageTitle().contains(HomePage.ELEMENTS_CATEGORY));
         new MenuElements(driver).clickOnCheckBox();
         Assert.assertTrue(webpageHandler.getPageTitle().contains(MenuElements.CHECK_BOX_ITEM));
-        checkBoxPage.clickExpandNode(Constants.HOME_NODE);
-        checkBoxPage.clickExpandNode(Constants.DOCUMENTS_NODE);
-        checkBoxPage.clickExpandNode(Constants.WORK_SPACE_NODE);
-        checkBoxPage.clickSelectNode(Constants.REACT_NODE);
-        checkBoxPage.clickSelectNode(Constants.ANGULAR_NODE);
-        checkBoxPage.clickSelectNode(Constants.VEU_NODE);
-        Assert.assertTrue(checkBoxPage.youHaveSelectedMessageDisplayedText().contains(Constants.REACT_NODE));
-        Assert.assertTrue(checkBoxPage.youHaveSelectedMessageDisplayedText().contains(Constants.ANGULAR_NODE));
-        Assert.assertTrue(checkBoxPage.youHaveSelectedMessageDisplayedText().contains(Constants.VEU_NODE));
-        Assert.assertTrue(checkBoxPage.youHaveSelectedMessageDisplayedText().contains(Constants.WORK_SPACE_NODE));
+        String expand = "expandNode";
+        String checkbox = "checkbox";
+
+        checkBoxPage.click(expand, HOME_NODE);
+        checkBoxPage.click(expand, DOCUMENTS_NODE);
+        checkBoxPage.click(expand, WORK_SPACE_NODE);
+        checkBoxPage.click(checkbox, REACT_NODE);
+        checkBoxPage.click(checkbox, ANGULAR_NODE);
+        checkBoxPage.click(checkbox, VEU_NODE);
+        Assert.assertTrue(checkBoxPage.youHaveSelectedMessageDisplayedText().contains(REACT_NODE));
+        Assert.assertTrue(checkBoxPage.youHaveSelectedMessageDisplayedText().contains(ANGULAR_NODE));
+        Assert.assertTrue(checkBoxPage.youHaveSelectedMessageDisplayedText().contains(VEU_NODE));
+        Assert.assertTrue(checkBoxPage.youHaveSelectedMessageDisplayedText().contains(WORK_SPACE_NODE));
     }
 
-    @AfterClass
-    public void close() {
-        if (driver != null) {
-            driver.quit();
-        }
+    @Test
+    public void test() {
+        WebpageHandler webpageHandler = new WebpageHandler(driver);
+        CheckBoxPage checkBoxPage = new CheckBoxPage(driver);
+
+        new HomePage(driver).clickElementsCategory();
+        Assert.assertTrue(webpageHandler.getPageTitle().contains(HomePage.ELEMENTS_CATEGORY));
+        new MenuElements(driver).clickOnCheckBox();
+        Assert.assertTrue(webpageHandler.getPageTitle().contains(MenuElements.CHECK_BOX_ITEM));
+
+        checkBoxPage.getNodes();
+        checkBoxPage.selects.forEach(s -> Assert.assertTrue(checkBoxPage.youHaveSelectedMessageDisplayedText()
+                .contains(s.toLowerCase().replaceAll("\\s","").replace(".doc",""))));
     }
+
 }

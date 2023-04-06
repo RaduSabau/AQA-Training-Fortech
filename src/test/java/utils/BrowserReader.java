@@ -1,5 +1,6 @@
 package utils;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,9 +11,11 @@ public class BrowserReader {
     public BrowserReader(String browserType) {
         switch (browserType) {
             case "chrome" -> {
+                WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver(getOptions());
             }
             case "firefox" -> {
+                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             }
         }
@@ -24,10 +27,16 @@ public class BrowserReader {
 
     private ChromeOptions getOptions() {
         return new ChromeOptions()
-                .addArguments("--remote-allow-origins=*")
-                .addArguments("--start-maximized")
                 .addArguments("disable-infobars")
-                .addArguments("--disable-dev-shm-usage");
+                .addArguments("--start-maximized")
+                .addArguments("--remote-allow-origins=*")
+                .addArguments("--disable-extensions")
+                .addArguments("--no-sandbox");
+    }
+    public void quit() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 }

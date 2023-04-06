@@ -11,6 +11,7 @@ import java.util.Date;
         private String firstName;
         private String lastName;
         private String email;
+        private String gender;
         private String mobileNumber;
         private Date dateOfBirth;
         private String subject;

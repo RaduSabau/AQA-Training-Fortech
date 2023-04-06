@@ -24,8 +24,8 @@ public class WebpageHandler {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void findElement(WebElement element) {
-        wait.until(ExpectedConditions.visibilityOf(element));
+    public WebElement findElement(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void clickItemMenu(String itemMenu) {

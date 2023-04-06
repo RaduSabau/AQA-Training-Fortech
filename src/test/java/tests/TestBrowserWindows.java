@@ -1,10 +1,8 @@
 package tests;
 
 import constants.Constants;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.alerts.MenuAlertFrameWindowsPage;
 import pages.alerts.browserwindows.BrowserWindowsPage;
@@ -13,29 +11,14 @@ import pages.alerts.browserwindows.NewWindowMessagePage;
 import utils.WebpageHandler;
 
 
-public class TestBrowserWindows {
-
-    private WebDriver driver;
-    private BrowserWindowsPage browserWindowsPage;
-    private NewTabPage newTabPage;
-    private NewWindowMessagePage newWindowMessagePage;
-    private WebpageHandler webpageHandler;
-
-
-    @BeforeClass
-    public void setup() {
-//        driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*").addArguments("--start-maximized=*"));
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        driver.get(Constants.MAIN_URL);
-        browserWindowsPage = new BrowserWindowsPage(driver);
-        newTabPage = new NewTabPage(driver);
-        newWindowMessagePage = new NewWindowMessagePage(driver);
-        webpageHandler = new WebpageHandler(driver);
-    }
+public class TestBrowserWindows extends MainPage {
 
     @Test
     public void testBrowserWindows() {
+        BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage(driver);
+        NewTabPage newTabPage = new NewTabPage(driver);
+        NewWindowMessagePage newWindowMessagePage = new NewWindowMessagePage(driver);
+        WebpageHandler webpageHandler = new WebpageHandler(driver);
 
         new HomePage(driver).clickAlertFrameWindowsCategory();
         Assert.assertTrue(webpageHandler.getPageTitle().contains(HomePage.ALERTS_FRAME_WINDOWS_CATEGORY));
@@ -69,13 +52,6 @@ public class TestBrowserWindows {
         Assert.assertTrue(newWindowMessagePage.getNewWindowText().contains(Constants.LONG_TEXT_SAMPLE));
 
         newTabPage.switchToParentWindow(currentWindow);
-    }
-
-    @AfterClass
-    public void close() {
-        if (driver != null) {
-            driver.quit();
-        }
     }
 }
 //taskKill /t /f /im chromedriver.exe /im chrome.exe /im geckodriver.exe
