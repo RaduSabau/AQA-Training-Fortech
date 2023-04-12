@@ -1,8 +1,8 @@
 package tests;
 
 import builder.StudentBuilder;
-import entities.practiceform.Student;
-import entities.practiceform.Students;
+import bean.practiceform.Student;
+import bean.practiceform.Students;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
@@ -18,7 +18,7 @@ import static constants.Constants.studentsfile;
 public class TestPracticeForm extends MainPage {
 
     @Test
-    public void testPracticeForm() {
+    public void testPracticeForm() throws InterruptedException {
         WebpageHandler webpageHandler = new WebpageHandler(driver);
         PracticeFormPage practiceFormPage = new PracticeFormPage(driver);
 
@@ -45,7 +45,7 @@ public class TestPracticeForm extends MainPage {
             practiceFormPage.addUserNumber(student.getMobileNumber());
             practiceFormPage.addUserEmail(student.getEmail());
             practiceFormPage.clickSubmitButton();
-//            practiceFormPage.getLabelStrings().forEach(v -> System.out.println(practiceFormPage.getWebElementText(v)));
+            practiceFormPage.getLabelStrings().forEach(v -> System.out.println(practiceFormPage.getWebElementText(v)));
             practiceFormPage.clickCloseLargeModal();
         }
     }

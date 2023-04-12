@@ -25,7 +25,8 @@ public class Constants {
     public static final String PARENT_FRAME_TEXT = "Parent frame";
     public static final String INNER_FRAME_TEXT = "Child Iframe";
     static String localDir = System.getProperty("user.dir");
-    public static File employeesfile = new File(localDir + "/src/test/resources/testdata/testemployee" +
-            "data.txt");
-    public static File studentsfile = new File(localDir + "/src/test/resources/testdata/teststudentdata.txt");
+    public static File employeesfile = new File(localDir + "/src/test/resources/testdata/txtData/" +
+            "testemployeedata.txt");
+    public static File studentsfile = new File(localDir + "/src/test/resources/testdata/txtData/" +
+            "teststudentdata.txt");
 }

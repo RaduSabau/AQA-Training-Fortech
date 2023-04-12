@@ -58,6 +58,11 @@ public class WebpageHandler {
         findElement(pageTitle);
         return pageTitle.getText();
     }
+
+    public void clickOnElementExecutor(WebElement element) {
+        findElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
 }
 
 

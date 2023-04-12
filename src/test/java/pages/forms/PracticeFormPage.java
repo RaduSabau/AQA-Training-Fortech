@@ -78,22 +78,16 @@ public class PracticeFormPage {
         WebElement genderElement = driver.findElement(By.xpath("//input[@value='" + gender + "']"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", genderElement);
     }
-    //TODO move to helpers
-    public void clickOnElementExecutor(WebElement element) {
-        webpageHandler.elementClickable(element);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-    }
-
 
     public String getWebElementText(String label) {
         return driver.findElement(By.xpath("//td[contains(text(),'" + label + "')]/following-sibling::td")).getText();
     }
 
     public void clickCloseLargeModal() {
-        clickOnElementExecutor(closeLargeModalButton);
+        webpageHandler.clickOnElementExecutor(closeLargeModalButton);
     }
 
     public void clickSubmitButton() {
-        clickOnElementExecutor(submitButton);
+        webpageHandler.clickOnElementExecutor(submitButton);
     }
 }

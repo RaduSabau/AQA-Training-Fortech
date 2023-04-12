@@ -1,4 +1,4 @@
-package entities.webtables;
+package bean.webtables;
 
 import lombok.Builder;
 import lombok.Getter;

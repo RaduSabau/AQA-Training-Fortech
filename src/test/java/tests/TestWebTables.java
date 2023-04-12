@@ -1,8 +1,8 @@
 package tests;
 
 import builder.EmployeeBuilder;
-import entities.webtables.Employee;
-import entities.webtables.Employees;
+import bean.webtables.Employee;
+import bean.webtables.Employees;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;

@@ -1,0 +1,16 @@
+{
+  "ids": [
+    {
+      "firstName": "Macy",
+      "lastName": "Schroeder",
+      "email": "MacySchroeder@mail.com",
+      "role": "Engineer",
+      "seniority": "Expert",
+      "personalInformation": {
+        "dateOfBirth": "1977-06-30",
+        "age": 45,
+        "gender": "Female"
+      }
+    }
+  ]
+}

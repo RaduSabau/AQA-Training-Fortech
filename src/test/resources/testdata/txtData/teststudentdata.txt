@@ -1,3 +1,4 @@
 Jim;Malkovich;JimMak@gmail.com;Male;0123456789;1988-08-02;Long Street 2
 Jane;Doe;janeDoe@email.com;Female;1011121314;1989-06-02;Short Street 3
+Julie;Janet;juliej@uahoo.com;Female;1234567891;1997-08-01;Street 4
 John;Doe;johnDoe@email.com;Male;1516171819;1990-05-02;Just Street 4

@@ -1,12 +1,12 @@
-package entities.webtables;
+package bean.jsonstructureobjbuilder;
 
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Collection;
 
 @Data
 @Builder(setterPrefix = "with")
 public class Employees {
-    private List<Employee> employees;
+    private Collection<ID> ids;
 }
