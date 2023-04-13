@@ -29,7 +29,7 @@ public class JsonStructureClass {
                     .withRole(utils.getRoleAndSeniority("role").get(random.nextInt(utils.getRoleAndSeniority("role").size())))
                     .withSeniority(utils.getRoleAndSeniority("seniority").get(random.nextInt(utils.getRoleAndSeniority("seniority").size())))
                     .withPersonalInformation(personalInformationGenerator())
-//                    .withFinancialInformation()
+                    .withFinancialInformation(financialInformationGenerator())
                     .build());
         }
         return Employees.builder().withIds(idList).build();
@@ -50,7 +50,7 @@ public class JsonStructureClass {
         return (FinancialInformation.builder()
                 .withSalary(salary)
                 .withBonus(salary * utils.getBonusPercent() / 100)
-                .withLastUpdated()
+                .withLastUpdated(String.valueOf(utils.getLastUpdatedDate()))
                 .build());
     }
 
