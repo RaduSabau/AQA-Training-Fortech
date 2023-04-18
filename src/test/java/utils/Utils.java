@@ -19,54 +19,45 @@ public class Utils {
     Random random = new Random();
 
     //    public List<String> readFileToList(String fileName) {
-//        String content;
-//        try {
-//            content = IOUtils.toString(Paths.get(fileName).toUri(), StandardCharsets.UTF_8);
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return content.lines().toList();
-//    }
-    private static void writeFile(String location, String fileName, String data) {
+    //        String content;
+    //        try {
+    //            content = IOUtils.toString(Paths.get(fileName).toUri(), StandardCharsets.UTF_8);
+    //
+    //        } catch (IOException e) {
+    //            throw new RuntimeException(e);
+    //        }
+    //        return content.lines().toList();
+    //    }
+    public static void writeFile(String location, String fileName, String data) {
         try {
             FileWriter fileWriter = new FileWriter(location + fileName);
-            @Cleanup
-            PrintWriter printWriter = new PrintWriter(fileWriter);
+            @Cleanup PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.print(data);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-//    public void jsonGenerator() {
-//        Gson gson = new Gson();
-//        Employees employees = employeesGenerator(7);
-//        String jsonString = gson.toJson(employees);
-//        String fileName = "test1.json";
-//        writeFile(rssPath, fileName, jsonString);
-//    }
-//    public Employees employeesGenerator(int nrOfUsers) {
-//        List<Employee> employees = new ArrayList<>();
-//        for (int i = 0; i < nrOfUsers; i++) {
-//            employees.add(Employee.builder()
-//                    .withFirstName(getFromMap("firstName").get(random.nextInt(getFromMap("firstName").size())))
-//                    .withLastName(RandomStringUtils.randomAlphabetic(5))
-//                    .withEmail(RandomStringUtils.randomAlphabetic(10) + "@example.com")
-//                    .withAge((int) (Math.random() * (60 - 22) + 22))
-//                    .withSalary((50000 + i * 10000))
-//                    .withDepartment("IT")
-//                    .build());
-//        }
-//        return Employees.builder().withEmployees(employees).build();
-//    }
-
-    private List<String> getFromMap(String key) {
-        Map<String, List<String>> map = new HashMap<>() {{
-            put("firstName", Arrays.asList("John", "Johnny", "Johnathan"));
-            put("lastName", Arrays.asList("Malkovish", "Doe", "Yes"));
-        }};
-        return map.get(key);
-    }
+    //    public void jsonGenerator() {
+    //        Gson gson = new Gson();
+    //        Employees employees = employeesGenerator(7);
+    //        String jsonString = gson.toJson(employees);
+    //        String fileName = "test1.json";
+    //        writeFile(rssPath, fileName, jsonString);
+    //    }
+    //    public Employees employeesGenerator(int nrOfUsers) {
+    //        List<Employee> employees = new ArrayList<>();
+    //        for (int i = 0; i < nrOfUsers; i++) {
+    //            employees.add(Employee.builder()
+    //                    .withFirstName(getFromMap("firstName").get(random.nextInt(getFromMap("firstName").size())))
+    //                    .withLastName(RandomStringUtils.randomAlphabetic(5))
+    //                    .withEmail(RandomStringUtils.randomAlphabetic(10) + "@example.com")
+    //                    .withAge((int) (Math.random() * (60 - 22) + 22))
+    //                    .withSalary((50000 + i * 10000))
+    //                    .withDepartment("IT")
+    //                    .build());
+    //        }
+    //        return Employees.builder().withEmployees(employees).build();
+    //    }
 
     public List<String> readFileToList(File file) {
         try {
@@ -96,8 +87,12 @@ public class Utils {
     }
 
     public LocalDate getDateOfBirth() {
-        LocalDate start = LocalDate.of(1970, Month.JANUARY, 1);
-        LocalDate end = LocalDate.of(2003, Month.JANUARY, 1);
+        return getRandomDate(1970, 1, 2003, 1);
+    }
+
+    public LocalDate getRandomDate(int startYear, int startDay, int endYear, int endDay) {
+        LocalDate start = LocalDate.of(startYear, Month.JANUARY, startDay);
+        LocalDate end = LocalDate.of(endYear, Month.JANUARY, endDay);
         long days = ChronoUnit.DAYS.between(start, end);
         return start.plusDays(random.nextInt((int) days + 1));
     }
@@ -112,10 +107,20 @@ public class Utils {
     }
 
     public int getSalary() {
-        return (random.nextInt(120 - 50) + 50)*1000;
+        return (random.nextInt(120 - 50) + 50) * 1000;
     }
-    public int getBonusPercent(){
+
+    public int getBonusPercent() {
         return (random.nextInt(100 - 1) + 1);
+    }
+
+    public LocalDate getLastUpdatedDate() {
+        return getRandomDate(2020, 1, 2023, 1);
+    }
+
+    public String getIdNumber() {
+        int idNo = faker.number().numberBetween(1, 1200);
+        return "id: " + idNo;
     }
 
 }

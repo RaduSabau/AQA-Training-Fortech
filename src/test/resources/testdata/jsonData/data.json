@@ -1,16 +1,60 @@
 {
-  "ids": [
-    {
-      "firstName": "Macy",
-      "lastName": "Schroeder",
-      "email": "MacySchroeder@mail.com",
-      "role": "Engineer",
-      "seniority": "Expert",
-      "personalInformation": {
-        "dateOfBirth": "1977-06-30",
-        "age": 45,
-        "gender": "Female"
+  "Department": {
+    "Employees": [
+      {
+        "id": 0,
+        "firstName": "Henri",
+        "lastName": "Cormier",
+        "email": "HenriCormier@mail.com",
+        "role": "PM",
+        "seniority": "Expert",
+        "personalInformation": {
+          "dateOfBirth": "1984-06-17",
+          "age": 38,
+          "gender": "Female"
+        },
+        "financialInformation": {
+          "salary": 92000,
+          "bonus": 4600,
+          "lastUpdated": "2021-02-05"
+        }
+      },
+      {
+        "id": 1,
+        "firstName": "Melisa",
+        "lastName": "Kling",
+        "email": "MelisaKling@mail.com",
+        "role": "PM",
+        "seniority": "Junior",
+        "personalInformation": {
+          "dateOfBirth": "2002-05-02",
+          "age": 20,
+          "gender": "Female"
+        },
+        "financialInformation": {
+          "salary": 106000,
+          "bonus": 58300,
+          "lastUpdated": "2020-04-20"
+        }
+      },
+      {
+        "id": 2,
+        "firstName": "Baby",
+        "lastName": "Bernhard",
+        "email": "BabyBernhard@mail.com",
+        "role": "HR",
+        "seniority": "Mid",
+        "personalInformation": {
+          "dateOfBirth": "1971-04-19",
+          "age": 51,
+          "gender": "Female"
+        },
+        "financialInformation": {
+          "salary": 94000,
+          "bonus": 87420,
+          "lastUpdated": "2022-02-23"
+        }
       }
-    }
-  ]
+    ]
+  }
 }

@@ -3,8 +3,6 @@ package bean.jsonstructureobjbuilder;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 @Builder(setterPrefix = "with")
 public class FinancialInformation {

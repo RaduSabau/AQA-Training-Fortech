@@ -1,16 +1,16 @@
 Department
     Employees
         id
-            firstName
-            lastName
-            email
-            role
-            seniority
-            personalInformation
-                dateOfBirth
-                age
-                gender
-            financialInformation
-                salary
-                bonus
-                lastUpdated
+        firstName
+        lastName
+        email
+        role
+        seniority
+        personalInformation
+            dateOfBirth
+            age
+            gender
+        financialInformation
+            salary
+            bonus
+            lastUpdated

@@ -1,9 +1,6 @@
 package utils;
 
-import bean.jsonstructureobjbuilder.Employees;
-import bean.jsonstructureobjbuilder.FinancialInformation;
-import bean.jsonstructureobjbuilder.ID;
-import bean.jsonstructureobjbuilder.PersonalInformation;
+import bean.jsonstructureobjbuilder.*;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -12,27 +9,31 @@ import java.util.List;
 import java.util.Random;
 
 
-public class JsonStructureClass {
+public class JsonStructure {
 
     Utils utils = new Utils();
     Random random = new Random();
 
-    public Employees idsGenerator(int noOfIds) {
-        List<ID> idList = new ArrayList<>();
+    public Department employeeGenerator(int noOfIds) {
+
+        List<Employee> employeeList = new ArrayList<>();
         for (int i = 0; i < noOfIds; i++) {
             String firstName = utils.getName().firstName();
             String lastName = utils.getName().lastName();
-            idList.add(ID.builder()
+            employeeList.add(Employee.builder()
+                    .withId(i)
                     .withFirstName(firstName)
                     .withLastName(lastName)
                     .withEmail(firstName + lastName + "@mail.com")
-                    .withRole(utils.getRoleAndSeniority("role").get(random.nextInt(utils.getRoleAndSeniority("role").size())))
-                    .withSeniority(utils.getRoleAndSeniority("seniority").get(random.nextInt(utils.getRoleAndSeniority("seniority").size())))
+                    .withRole(utils.getRoleAndSeniority("role")
+                            .get(random.nextInt(utils.getRoleAndSeniority("role").size())))
+                    .withSeniority(utils.getRoleAndSeniority("seniority")
+                            .get(random.nextInt(utils.getRoleAndSeniority("seniority").size())))
                     .withPersonalInformation(personalInformationGenerator())
                     .withFinancialInformation(financialInformationGenerator())
                     .build());
         }
-        return Employees.builder().withIds(idList).build();
+        return Department.builder().withEmployees(employeeList).build();
     }
 
     public PersonalInformation personalInformationGenerator() {
@@ -41,7 +42,8 @@ public class JsonStructureClass {
         return (PersonalInformation.builder()
                 .withAge(age)
                 .withDateOfBirth(String.valueOf(dateOfBirth))
-                .withGender(utils.getRoleAndSeniority("gender").get(random.nextInt(utils.getRoleAndSeniority("gender").size())))
+                .withGender(utils.getRoleAndSeniority("gender")
+                        .get(random.nextInt(utils.getRoleAndSeniority("gender").size())))
                 .build());
     }
 
@@ -54,4 +56,7 @@ public class JsonStructureClass {
                 .build());
     }
 
+    public Departments departmentsGenerator(int noOfIds) {
+        return Departments.builder().withDepartment(employeeGenerator(noOfIds)).build();
+    }
 }

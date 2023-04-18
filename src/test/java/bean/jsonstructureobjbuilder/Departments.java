@@ -8,7 +8,7 @@ import java.util.Collection;
 
 @Data
 @Builder(setterPrefix = "with")
-public class Department {
-    @SerializedName(value = "Employees")
-    private Collection<Employee> employees;
+public class Departments {
+    @SerializedName(value = "Department")
+    private Department department;
 }
