@@ -1,4 +1,4 @@
-package tests;
+package tests.demoqatests;
 
 import constants.Constants;
 import org.testng.Assert;
@@ -8,6 +8,7 @@ import pages.alerts.MenuAlertFrameWindowsPage;
 import pages.alerts.browserwindows.BrowserWindowsPage;
 import pages.alerts.browserwindows.NewTabPage;
 import pages.alerts.browserwindows.NewWindowMessagePage;
+import tests.MainPage;
 import utils.WebpageHandler;
 
 

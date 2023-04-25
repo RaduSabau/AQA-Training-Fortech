@@ -2,57 +2,129 @@
   "Department": {
     "Employees": [
       {
-        "id": 0,
-        "firstName": "Liam",
-        "lastName": "Rowe",
-        "email": "LiamRowe@mail.com",
-        "role": "Technician",
+        "id": 773,
+        "firstName": "Eleazar",
+        "lastName": "Bosco",
+        "email": "EleazarBosco@mail.com",
+        "role": "Engineer",
         "seniority": "Mid",
         "personalInformation": {
-          "dateOfBirth": "1980-02-23",
-          "age": 43,
+          "dateOfBirth": "1983-04-26",
+          "age": 39,
           "gender": "Female"
         },
         "financialInformation": {
-          "salary": 93000,
-          "bonus": 51150,
-          "lastUpdated": "2022-05-21"
+          "salary": 68000,
+          "bonus": 56440,
+          "lastUpdated": "2022-03-21"
         }
       },
       {
-        "id": 1,
-        "firstName": "Keira",
-        "lastName": "Leannon",
-        "email": "KeiraLeannon@mail.com",
+        "id": 952,
+        "firstName": "Noemy",
+        "lastName": "Schmidt",
+        "email": "NoemySchmidt@mail.com",
         "role": "Engineer",
-        "seniority": "Junior",
+        "seniority": "Mid",
         "personalInformation": {
-          "dateOfBirth": "1971-01-20",
-          "age": 52,
-          "gender": "Female"
-        },
-        "financialInformation": {
-          "salary": 80000,
-          "bonus": 69600,
-          "lastUpdated": "2020-02-04"
-        }
-      },
-      {
-        "id": 2,
-        "firstName": "Gunner",
-        "lastName": "Feil",
-        "email": "GunnerFeil@mail.com",
-        "role": "HR",
-        "seniority": "Senior",
-        "personalInformation": {
-          "dateOfBirth": "1974-01-19",
-          "age": 49,
+          "dateOfBirth": "1990-06-21",
+          "age": 32,
           "gender": "Male"
         },
         "financialInformation": {
-          "salary": 50000,
-          "bonus": 16000,
-          "lastUpdated": "2020-03-04"
+          "salary": 93000,
+          "bonus": 63240,
+          "lastUpdated": "2021-03-24"
+        }
+      },
+      {
+        "id": 1259,
+        "firstName": "Domenick",
+        "lastName": "Lakin",
+        "email": "DomenickLakin@mail.com",
+        "role": "Accountant",
+        "seniority": "Expert",
+        "personalInformation": {
+          "dateOfBirth": "1998-09-10",
+          "age": 24,
+          "gender": "Male"
+        },
+        "financialInformation": {
+          "salary": 106000,
+          "bonus": 55120,
+          "lastUpdated": "2021-12-04"
+        }
+      },
+      {
+        "id": 896,
+        "firstName": "Darby",
+        "lastName": "Halvorson",
+        "email": "DarbyHalvorson@mail.com",
+        "role": "Engineer",
+        "seniority": "Mid",
+        "personalInformation": {
+          "dateOfBirth": "2002-11-23",
+          "age": 20,
+          "gender": "Female"
+        },
+        "financialInformation": {
+          "salary": 95000,
+          "bonus": 13300,
+          "lastUpdated": "2020-02-27"
+        }
+      },
+      {
+        "id": 38,
+        "firstName": "Vivianne",
+        "lastName": "Schmidt",
+        "email": "VivianneSchmidt@mail.com",
+        "role": "PM",
+        "seniority": "Junior",
+        "personalInformation": {
+          "dateOfBirth": "1976-04-30",
+          "age": 46,
+          "gender": "Female"
+        },
+        "financialInformation": {
+          "salary": 114000,
+          "bonus": 86640,
+          "lastUpdated": "2021-10-06"
+        }
+      },
+      {
+        "id": 1122,
+        "firstName": "Yolanda",
+        "lastName": "Homenick",
+        "email": "YolandaHomenick@mail.com",
+        "role": "Engineer",
+        "seniority": "Mid",
+        "personalInformation": {
+          "dateOfBirth": "2002-10-26",
+          "age": 20,
+          "gender": "Male"
+        },
+        "financialInformation": {
+          "salary": 114000,
+          "bonus": 29640,
+          "lastUpdated": "2021-06-10"
+        }
+      },
+      {
+        "id": 496,
+        "firstName": "Leland",
+        "lastName": "Feil",
+        "email": "LelandFeil@mail.com",
+        "role": "Accountant",
+        "seniority": "Expert",
+        "personalInformation": {
+          "dateOfBirth": "1983-06-21",
+          "age": 39,
+          "gender": "Male"
+        },
+        "financialInformation": {
+          "salary": 112000,
+          "bonus": 41440,
+          "lastUpdated": "2022-02-07"
         }
       }
     ]
