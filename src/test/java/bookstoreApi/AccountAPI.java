@@ -1,6 +1,6 @@
 package bookstoreApi;
 
-import bookstoreApi.bookstoreuserbuilder.BookStoreUser;
+import bookstoreApi.bookstoreuserbuilder.BookStoreUserBody;
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -18,12 +18,6 @@ public class AccountAPI {
 
     public void setRestAssured() {
         RestAssured.baseURI = "https://demoqa.com";
-    }
-
-    public String bookStoreUserJson() {
-        BookStoreUser user = BookStoreUser.builder().withUserName(new Utils().getRandomName().name())
-                .withPassword("1234ASdf!@#$").build();
-        return new Gson().toJson(user);
     }
 
     public Response postResponse(String endPoint, String value) {
