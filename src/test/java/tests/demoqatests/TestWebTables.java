@@ -1,14 +1,13 @@
 package tests.demoqatests;
 
 import builder.EmployeeBuilder;
-import bean.webtables.Employee;
-import bean.webtables.Employees;
+import dto.webtables.Employee;
+import dto.webtables.Employees;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.elements.MenuElements;
 import pages.elements.webTables.WebTablesPage;
-import tests.MainPage;
 import utils.Utils;
 import utils.WebpageHandler;
 import java.util.ArrayList;

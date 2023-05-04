@@ -1,6 +1,6 @@
 package builder;
 
-import bean.practiceform.Student;
+import dto.practiceform.Student;
 import utils.Utils;
 
 public class StudentBuilder {

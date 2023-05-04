@@ -1,15 +1,15 @@
-package bookstoreApi;
+package bookstoreapi;
 
-import bookstoreApi.bookstoreuserbuilder.BookStoreUserBody;
-import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import utils.Utils;
+
+import java.util.ArrayList;
 
 public class AccountAPI {
+    public static ArrayList userBooksIsbnList;
     private final String accountEndpoint = "/Account/v1/";
     public final String userEndpoint = accountEndpoint + "User";
     public String userIdEndpoint = userEndpoint + "/{userID}";
@@ -33,10 +33,9 @@ public class AccountAPI {
         request.when().delete(endpoint).then().log().status().log().body();
     }
 
-    public void getResponseWithUserId(String endpoint, String userId, String token) {
+    public void getBooksIsbnWithUserId(String endpoint, String userId, String token) {
         setRestAssured();
         RequestSpecification request = RestAssured.given().contentType(ContentType.JSON).header("Authorization", token).pathParam("userID", userId).log().uri();
-        request.when().get(endpoint).then().log().status().log().body();
+        userBooksIsbnList = request.when().get(endpoint).then().log().status().log().body().extract().path("books.isbn");
     }
-
 }

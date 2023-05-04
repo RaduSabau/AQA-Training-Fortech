@@ -1,4 +1,4 @@
-package bean.practiceform;
+package dto.practiceform;
 
 import lombok.Builder;
 import lombok.Data;

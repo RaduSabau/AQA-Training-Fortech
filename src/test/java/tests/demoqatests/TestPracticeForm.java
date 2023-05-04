@@ -1,14 +1,13 @@
 package tests.demoqatests;
 
 import builder.StudentBuilder;
-import bean.practiceform.Student;
-import bean.practiceform.Students;
+import dto.practiceform.Student;
+import dto.practiceform.Students;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.forms.MenuForms;
 import pages.forms.PracticeFormPage;
-import tests.MainPage;
 import utils.Utils;
 import utils.WebpageHandler;
 import java.util.ArrayList;

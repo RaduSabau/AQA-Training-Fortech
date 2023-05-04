@@ -20,7 +20,7 @@ public class WebpageHandler {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    private <T> void waitElement(T elementAttr) {
+    public <T> void waitElement(T elementAttr) {
         if (elementAttr.getClass().getName().contains("By")) {
             wait.until(ExpectedConditions.visibilityOfElementLocated((By) elementAttr));
         } else {
@@ -66,16 +66,6 @@ public class WebpageHandler {
         findElement(pageTitle);
         return pageTitle.getText();
     }
-
-    public <T> String readText(T elementAttr) {
-        waitElement(elementAttr);
-        if (elementAttr.getClass().getName().contains("By")) {
-            return driver.findElement((By) elementAttr).getText();
-        } else {
-            return ((WebElement) elementAttr).getText();
-        }
-    }
-
 
     public void clickOnElementExecutor(WebElement element) {
         waitElement(element);

@@ -1,4 +1,4 @@
-package bean.webtables;
+package dto.webtables;
 
 import lombok.Builder;
 import lombok.Getter;

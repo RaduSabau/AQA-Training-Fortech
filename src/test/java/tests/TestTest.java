@@ -1,7 +1,7 @@
 package tests;
 
-import bean.jsonstructurebuilder.Departments;
-import bean.jsonstructurebuilder.JsonStructureBuilder;
+import dto.jsonstructurebuilder.Departments;
+import dto.jsonstructurebuilder.JsonStructureBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.testng.annotations.Test;

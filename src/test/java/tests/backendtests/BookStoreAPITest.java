@@ -1,11 +1,13 @@
 package tests.backendtests;
 
-import bookstoreApi.AccountAPI;
-import bookstoreApi.BookStoreAPI;
-import bookstoreApi.bookstoreuserbuilder.Book;
-import bookstoreApi.bookstoreuserbuilder.BookStoreJsonBodyBuilders;
+import bookstoreapi.AccountAPI;
+import bookstoreapi.BookStoreAPI;
+import bookstoreapi.bookstoreuserbuilder.Book;
+import bookstoreapi.bookstoreuserbuilder.BookStoreJsonBodyBuilders;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
+
+import static bookstoreapi.AccountAPI.userBooksIsbnList;
 
 public class BookStoreAPITest {
     private final String bookStoreEndpoint = "/BookStore/v1/";
@@ -26,14 +28,15 @@ public class BookStoreAPITest {
         accountAPI.postResponse(accountAPI.authorizedEndpoint, body);
         books = bookStoreJsonBodyBuilders.getListOfBooks(booksEndpoint);
         for (int i = 0; i < 4; i++) {
-            bookStoreAPI.getBookByIsbn(bookEndpoint,token,books[i].getIsbn());
+            bookStoreAPI.getBookByIsbn(bookEndpoint, token, books[i].getIsbn());
             bookStoreAPI.postAddListOfBooks(booksEndpoint, token, userId, books[i].getIsbn());
-            bookStoreAPI.deleteBook(bookEndpoint,token,userId,books[i].getIsbn());
         }
-//        bookStoreAPI.putResponseForBook(isbnBookEndpoint,token,userId);
-        bookStoreAPI.deleteAllBooks(booksEndpoint,token,userId);
-        accountAPI.getResponseWithUserId(accountAPI.userIdEndpoint, userId, token);
+        accountAPI.getBooksIsbnWithUserId(accountAPI.userIdEndpoint, userId, token);
+        bookStoreAPI.deleteBook(bookEndpoint, token, userId, userBooksIsbnList.get(0).toString());
+        accountAPI.getBooksIsbnWithUserId(accountAPI.userIdEndpoint, userId, token);
+        bookStoreAPI.putResponseForBook(isbnBookEndpoint, token, userId, books[5].getIsbn(), userBooksIsbnList.get(0).toString());
+        bookStoreAPI.deleteAllBooks(booksEndpoint, token, userId);
+        accountAPI.getBooksIsbnWithUserId(accountAPI.userIdEndpoint, userId, token);
         accountAPI.deleteResponseWithUserId(accountAPI.userIdEndpoint, userId, token);
     }
-    //TODO Error handling, project structuring
 }

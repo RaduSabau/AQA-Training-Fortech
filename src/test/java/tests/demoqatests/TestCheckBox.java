@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.elements.MenuElements;
 import pages.elements.checkBox.CheckBoxPage;
-import tests.MainPage;
 import utils.WebpageHandler;
 
 import static constants.Constants.*;

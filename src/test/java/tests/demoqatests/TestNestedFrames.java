@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.alerts.MenuAlertFrameWindowsPage;
 import pages.alerts.NestedFrames.NestedFramesPage;
-import tests.MainPage;
 import utils.WebpageHandler;
 
 public class TestNestedFrames extends MainPage {

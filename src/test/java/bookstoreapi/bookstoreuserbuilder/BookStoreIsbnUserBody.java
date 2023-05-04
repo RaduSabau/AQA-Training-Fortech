@@ -1,4 +1,4 @@
-package bookstoreApi.bookstoreuserbuilder;
+package bookstoreapi.bookstoreuserbuilder;
 
 import lombok.Builder;
 

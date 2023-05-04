@@ -1,4 +1,4 @@
-package bean.jsonstructurebuilder;
+package dto.jsonstructurebuilder;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Builder;

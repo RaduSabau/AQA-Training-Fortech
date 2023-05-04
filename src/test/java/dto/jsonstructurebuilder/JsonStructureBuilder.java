@@ -1,4 +1,4 @@
-package bean.jsonstructurebuilder;
+package dto.jsonstructurebuilder;
 
 import jsonstructure.JsonStructureHandler;
 import utils.Utils;

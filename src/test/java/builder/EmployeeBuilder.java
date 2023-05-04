@@ -1,6 +1,6 @@
 package builder;
 
-import bean.webtables.Employee;
+import dto.webtables.Employee;
 import utils.Utils;
 
 public class EmployeeBuilder {

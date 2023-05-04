@@ -1,7 +1,7 @@
 package tests.backendtests;
 
-import bookstoreApi.AccountAPI;
-import bookstoreApi.bookstoreuserbuilder.BookStoreJsonBodyBuilders;
+import bookstoreapi.AccountAPI;
+import bookstoreapi.bookstoreuserbuilder.BookStoreJsonBodyBuilders;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -16,7 +16,7 @@ public class AccountAPITest {
         String userId = response.getBody().jsonPath().get("userID");
         String token = accountAPI.postResponse(accountAPI.generateTokenEndpoint, body).getBody().jsonPath().get("token");
         accountAPI.postResponse(accountAPI.authorizedEndpoint, body);
-        accountAPI.getResponseWithUserId(accountAPI.userIdEndpoint,token,userId);
+        accountAPI.getBooksIsbnWithUserId(accountAPI.userIdEndpoint,token,userId);
         accountAPI.deleteResponseWithUserId(accountAPI.userIdEndpoint, userId, token);
     }
 }

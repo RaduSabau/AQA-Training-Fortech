@@ -54,15 +54,6 @@ public class CheckBoxPage {
                 .filter(e -> e.getText().contains(s))
                 .peek(element -> ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element))
                 .findFirst().get().click());
-
-//        for (String a : selects) {
-//            for (WebElement e : names) {
-//                if (e.getText().contains(a)) {
-//                    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", e);
-//                    e.click();
-//                }
-//            }
-//        }
     }
 
     private boolean isaBoolean() {

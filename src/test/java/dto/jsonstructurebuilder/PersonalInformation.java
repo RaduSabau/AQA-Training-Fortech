@@ -1,4 +1,4 @@
-package bean.jsonstructurebuilder;
+package dto.jsonstructurebuilder;
 
 import lombok.Builder;
 import lombok.Data;
