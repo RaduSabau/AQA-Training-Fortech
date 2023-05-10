@@ -34,7 +34,7 @@ public class CheckBoxPage {
 
     public void click(String selection, String name) {
         By element = By.xpath(options.get(selection).replace("$replaceMe$", name));
-        webpageHandler.findElement(driver.findElement(element)).click();
+        webpageHandler.findElement(element).click();
     }
 
     public String youHaveSelectedMessageDisplayedText() {

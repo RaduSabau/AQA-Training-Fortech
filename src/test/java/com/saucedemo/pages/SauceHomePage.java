@@ -1,48 +1,43 @@
 package com.saucedemo.pages;
 
-import com.demoqa.frontend.utils.WebpageHandler;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
+import com.saucedemo.test.BasePage;
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SauceHomePage {
-
-    private final WebpageHandler webpageHandler;
-    @FindBy(id = "user-name")
-    public WebElement usernameField;
-    @FindBy(id = "password")
-    public WebElement passwordField;
-    @FindBy(id = "login-button")
-    public WebElement loginButton;
-    @FindBy(id = "react-burger-menu-btn")
-    public WebElement burgerButton;
-    @FindBy(id = "logout_sidebar_link")
-    public WebElement logoutButton;
+@Slf4j
+public class SauceHomePage extends BasePage {
 
     protected WebDriver driver;
+    @FindBy(id = "user-name")
+    private WebElement usernameField;
+    @FindBy(id = "password")
+    private WebElement passwordField;
+    @FindBy(id = "login-button")
+    private WebElement loginButton;
+    @FindBy(xpath = "//*[@data-test=\"error\"]")
+    private WebElement errorMessage;
 
     public SauceHomePage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
-        this.webpageHandler = new WebpageHandler(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public void addStringInInputField(WebElement element, String value) {
-        webpageHandler.findElement(element);
-        element.sendKeys(value);
+    public void loginWith(String username, String password) {
+        sendText(usernameField, username);
+        sendText(passwordField, password);
+        jsClick(loginButton);
+        log.info("Logged in with {} | {}. {}", username,password, getErrorMessage());
     }
 
-    public void addClick(WebElement element) {
-        webpageHandler.elementClickable(element);
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
-    }
-
-    public void clearInputField(WebElement element) {
-        element.sendKeys(Keys.CONTROL, "a");
-        element.sendKeys(Keys.DELETE);
+    public String getErrorMessage() {
+        if (driver.findElements(By.xpath("//*[@data-test=\"error\"]")).size() > 0) {
+            return "Error: " + readText(errorMessage);
+        }
+        return "";
     }
 }

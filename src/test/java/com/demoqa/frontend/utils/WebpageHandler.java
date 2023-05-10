@@ -1,10 +1,7 @@
 package com.demoqa.frontend.utils;
 
 import com.demoqa.frontend.constants.Constants;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,15 +9,15 @@ import java.time.Duration;
 import java.util.Set;
 
 public class WebpageHandler {
-    WebDriverWait wait;
-    WebDriver driver;
+    private final WebDriverWait wait;
+    private final WebDriver driver;
 
     public WebpageHandler(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
 
-    public <T> void waitElement(T elementAttr) {
+    private <T> void waitElement(T elementAttr) {
         if (elementAttr.getClass().getName().contains("By")) {
             wait.until(ExpectedConditions.visibilityOfElementLocated((By) elementAttr));
         } else {
@@ -28,12 +25,17 @@ public class WebpageHandler {
         }
     }
 
-    public WebElement elementClickable(WebElement element) {
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
+    public <T> WebElement findElement(T elementAttr) {
+        waitElement(elementAttr);
+        if (elementAttr.getClass().getName().contains("By")) {
+            return driver.findElement((By) elementAttr);
+        } else {
+            return ((WebElement) elementAttr);
+        }
     }
 
-    public WebElement findElement(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element));
+    public WebElement elementClickable(WebElement element) {
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void clickItemMenu(String itemMenu) {

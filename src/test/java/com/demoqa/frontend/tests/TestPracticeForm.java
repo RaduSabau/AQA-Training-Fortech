@@ -9,16 +9,18 @@ import com.demoqa.frontend.pages.forms.MenuForms;
 import com.demoqa.frontend.pages.forms.PracticeFormPage;
 import com.demoqa.frontend.utils.Utils;
 import com.demoqa.frontend.utils.WebpageHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class TestPracticeForm extends MainPage {
 
     @Test
-    public void testPracticeForm() throws InterruptedException {
+    public void testPracticeForm() {
         WebpageHandler webpageHandler = new WebpageHandler(driver);
         PracticeFormPage practiceFormPage = new PracticeFormPage(driver);
 
@@ -45,7 +47,7 @@ public class TestPracticeForm extends MainPage {
             practiceFormPage.addUserNumber(student.getMobileNumber());
             practiceFormPage.addUserEmail(student.getEmail());
             practiceFormPage.clickSubmitButton();
-            practiceFormPage.getLabelStrings().forEach(v -> System.out.println(practiceFormPage.getWebElementText(v)));
+            practiceFormPage.getLabelStrings().forEach(v -> log.info(practiceFormPage.getWebElementText(v)));
             practiceFormPage.clickCloseLargeModal();
         }
     }
