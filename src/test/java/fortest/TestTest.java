@@ -5,8 +5,8 @@ import com.demoqa.frontend.dto.jsonstructurebuilder.JsonStructureBuilder;
 import com.demoqa.frontend.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.saucedemo.dto.userbuilderjson.Users;
-import com.saucedemo.dto.userbuilderjson.UsersBuilder;
+import com.saucedemo.dto.Users;
+import com.saucedemo.dto.UsersBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 

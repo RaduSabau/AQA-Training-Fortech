@@ -1,4 +1,4 @@
-package com.saucedemo.dto.userbuilderjson;
+package com.saucedemo.dto;
 
 import lombok.Builder;
 import lombok.Data;

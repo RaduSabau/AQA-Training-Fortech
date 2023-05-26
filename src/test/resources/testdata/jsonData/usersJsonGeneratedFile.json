@@ -2,19 +2,31 @@
   "users": [
     {
       "username": "standard_user",
-      "password": "secret_sauce"
+      "password": "secret_sauce",
+      "firstName": "Doe",
+      "lastName": "John",
+      "postalCode": "400400"
     },
     {
       "username": "locked_out_user",
-      "password": "secret_sauce"
+      "password": "secret_sauce",
+      "firstName": "Smith",
+      "lastName": "Jane",
+      "postalCode": "100100"
     },
     {
       "username": "problem_user",
-      "password": "secret_sauce"
+      "password": "secret_sauce",
+      "firstName": "Peterson",
+      "lastName": "George",
+      "postalCode": "200200"
     },
     {
       "username": "performance_glitch_user",
-      "password": "secret_sauce"
+      "password": "secret_sauce",
+      "firstName": "Jackson",
+      "lastName": "Julian",
+      "postalCode": "300300"
     }
   ]
 }

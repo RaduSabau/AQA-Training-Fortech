@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test-method Suite" parallel="methods" thread-count="3">
+    <test name="SauceDemo Test">
+        <classes>
+            <class name="com.saucedemo.test.SauceDemoTest">
+                <methods>
+                    <include name="sauceDemoLoginAndLogoutTest"/>
+                </methods>
+            </class>
+            <class name="com.saucedemo.test.SauceDemoSecondTest">
+                <methods>
+                    <include name="addProductToShoppingCartAndCheckout"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

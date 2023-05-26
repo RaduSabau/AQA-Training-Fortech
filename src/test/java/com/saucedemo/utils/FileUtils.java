@@ -1,9 +1,7 @@
 package com.saucedemo.utils;
 
 import com.google.gson.Gson;
-import com.saucedemo.dto.userbuilderjson.Users;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import com.saucedemo.dto.Users;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -11,10 +9,8 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
-public class PageHandler {
+public class FileUtils {
 
     public Reader getReader(String fileName) {
         try {
@@ -32,7 +28,7 @@ public class PageHandler {
         }
     }
     public Users getFromJson(String fileName) {
-        return new Gson().fromJson(new PageHandler().getReader(fileName), Users.class);
+        return new Gson().fromJson(new FileUtils().getReader(fileName), Users.class);
     }
 
 

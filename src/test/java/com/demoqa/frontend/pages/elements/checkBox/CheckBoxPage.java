@@ -53,7 +53,7 @@ public class CheckBoxPage {
         selects.forEach(s -> names.stream()
                 .filter(e -> e.getText().contains(s))
                 .peek(element -> ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element))
-                .findFirst().get().click());
+                .findFirst().orElseThrow().click());
     }
 
     private boolean isaBoolean() {

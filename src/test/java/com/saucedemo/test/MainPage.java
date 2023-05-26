@@ -3,8 +3,7 @@ package com.saucedemo.test;
 import com.demoqa.frontend.utils.BrowserReader;
 import com.saucedemo.constants.Constants;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 
 public class MainPage {
     protected WebDriver driver;

@@ -1,4 +1,4 @@
-package com.saucedemo.dto.userbuilderjson;
+package com.saucedemo.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -8,4 +8,7 @@ import lombok.Data;
 public class User {
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
+    private String postalCode;
 }

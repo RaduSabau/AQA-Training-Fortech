@@ -1,11 +1,17 @@
 package com.saucedemo.test;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public abstract class BasePage {
@@ -16,6 +22,12 @@ public abstract class BasePage {
     protected BasePage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        PageFactory.initElements(driver, this);
+    }
+
+    public static void highlight(WebDriver driver, WebElement element) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].setAttribute('style', 'background: yellow transparent; border: 3px solid blue;');", element);
     }
 
     private <T> void waitElement(T elementAttr) {
@@ -68,4 +80,23 @@ public abstract class BasePage {
             clearInputField((WebElement) elementAttr).sendKeys(text);
         }
     }
+
+    public List<String> getTitlesFromPageToList(String element) {
+        List<String> titles = new ArrayList<>();
+        List<WebElement> titlesElm = driver.findElements(By.className(element));
+        for (WebElement titleElm : titlesElm) {
+            titles.add(titleElm.getText());
+        }
+        return titles;
+    }
+
+    public void takeScreenShot() {
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(screenshot, new File(System.getProperty("user.dir") + "/src/test/java/com/saucedemo/screenshots/" + System.currentTimeMillis() + ".png"));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
