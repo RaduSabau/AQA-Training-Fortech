@@ -81,13 +81,13 @@ public abstract class BasePage {
         }
     }
 
-    public List<String> getTitlesFromPageToList(String element) {
-        List<String> titles = new ArrayList<>();
-        List<WebElement> titlesElm = driver.findElements(By.className(element));
-        for (WebElement titleElm : titlesElm) {
-            titles.add(titleElm.getText());
+    public List<String> getTextsFromPageToList(String element) {
+        List<String> texts = new ArrayList<>();
+        List<WebElement> textsElm = driver.findElements(By.className(element));
+        for (WebElement textElm : textsElm) {
+            texts.add(textElm.getText());
         }
-        return titles;
+        return texts;
     }
 
     public void takeScreenShot() {

@@ -25,7 +25,7 @@ public class CheckoutOverviewPage extends BasePage {
     }
 
     public double productPricesSum(){
-        List<String> listOfProductPrices = getTitlesFromPageToList(priceElement);
+        List<String> listOfProductPrices = getTextsFromPageToList(priceElement);
         double sum=0;
         for(String price:listOfProductPrices){
             sum = sum + Double.parseDouble(price.substring(1));

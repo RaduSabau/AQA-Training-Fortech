@@ -7,8 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.saucedemo.constants.Constants.*;
 
@@ -38,7 +41,6 @@ public class SauceDemoTest extends MainPage {
 
     @Test
     public void addProductToShoppingCartAndCheckout() {
-        System.out.println(driver);
         LoginPage loginPage = new LoginPage(driver);
         ProductsPage productsPage = new ProductsPage(driver);
         YourCartPage yourCartPage = new YourCartPage(driver);
@@ -70,17 +72,10 @@ public class SauceDemoTest extends MainPage {
 
         productsPage.logout();
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
     @Test
     public void testLoginWithInvalidUserAndValidPassword() {
-        System.out.println(driver);
         LoginPage loginPage = new LoginPage(driver);
         User user = getUsersFromFile().stream().toList().get(0);
         loginPage.loginWith("username", user.getPassword());
@@ -89,7 +84,6 @@ public class SauceDemoTest extends MainPage {
 
     @Test
     public void testLoginWithValidUsernameAndInvalidPassword() {
-        System.out.println(driver);
         LoginPage loginPage = new LoginPage(driver);
         User user = getUsersFromFile().stream().toList().get(0);
         loginPage.loginWith(user.getUsername(), "password");
@@ -98,7 +92,6 @@ public class SauceDemoTest extends MainPage {
 
     @Test
     public void testLoginWithInvalidUsernameAndPassword() {
-        System.out.println(driver);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginWith("username", "password");
         Assert.assertEquals(loginPage.getErrorMessage(), USERNAME_PASSWORD_DO_NOT_MATCH_MESSAGE);
@@ -106,7 +99,6 @@ public class SauceDemoTest extends MainPage {
 
     @Test
     public void testLoginWithNoUsernameAndValidPassword() {
-        System.out.println(driver);
         LoginPage loginPage = new LoginPage(driver);
         User user = getUsersFromFile().stream().toList().get(0);
         loginPage.loginWith("", user.getPassword());
@@ -115,7 +107,6 @@ public class SauceDemoTest extends MainPage {
 
     @Test
     public void testLoginWithValidUsernameAndNoPassword() {
-        System.out.println(driver);
         LoginPage loginPage = new LoginPage(driver);
         User user = getUsersFromFile().stream().toList().get(0);
         loginPage.loginWith(user.getUsername(), "");
@@ -124,26 +115,57 @@ public class SauceDemoTest extends MainPage {
 
     @Test
     public void testLoginWithNoUsernameAndPassword() {
-        System.out.println(driver);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginWith("", "");
         Assert.assertEquals(loginPage.getErrorMessage(), USERNAME_IS_REQUIRED);
     }
 
-//    @Test
-//    public void testSortAToZ(){
-//        LoginPage loginPage = new LoginPage(driver);
-//        ProductsPage productsPage = new ProductsPage(driver);
-//        User user = getUsersFromFile().stream().toList().get(0);
-//        loginPage.loginWith(user.getUsername(), user.getPassword());
-//        productsPage.sortProductZToA();
-//        Collection<String> productsTitleList = productsPage.getProductsTitleList();
-//        System.out.println(productsTitleList);
-//    }
+    @Test
+    public void testSortProducts() {
+        LoginPage loginPage = new LoginPage(driver);
+        ProductsPage productsPage = new ProductsPage(driver);
 
+        User user = getUsersFromFile().stream().toList().get(0);
+        loginPage.loginWith(user.getUsername(), user.getPassword());
+        List<String> displayedProducts = productsPage.getProductsTitleList();
+        List<Double> displayedPrices = productsPage.getPricesToList();
+
+        productsPage.sortBy("nameZToA");
+        Assert.assertEquals(productsPage.getProductsTitleList(), displayedProducts.stream().sorted(Comparator.reverseOrder()).toList());
+
+        productsPage.sortBy("nameAToZ");
+        Assert.assertEquals(productsPage.getProductsTitleList(), displayedProducts.stream().sorted().toList());
+
+        productsPage.sortBy("highToLow");
+        Assert.assertEquals(productsPage.getPricesToList(), displayedPrices.stream().sorted(Comparator.reverseOrder()).toList());
+
+        productsPage.sortBy("lowToHigh");
+        Assert.assertEquals(productsPage.getPricesToList(), displayedPrices.stream().sorted().toList());
+    }
+    @Test
+    public void testBlankCheckoutInformationFields() throws InterruptedException {
+        LoginPage loginPage = new LoginPage(driver);
+        ProductsPage productsPage = new ProductsPage(driver);
+        YourCartPage yourCartPage = new YourCartPage(driver);
+        CheckoutYourInformationPage checkoutYourInformationPage = new CheckoutYourInformationPage(driver);
+        User user = getUsersFromFile().stream().toList().get(0);
+        loginPage.loginWith(user.getUsername(), user.getPassword());
+
+        productsPage.clickAddAllToCartButton();
+        productsPage.clickShoppingCartLink();
+        yourCartPage.clickCheckoutButton();
+        checkoutYourInformationPage.fillCheckoutUserInfo("","","");
+        Assert.assertEquals(checkoutYourInformationPage.setErrorMessage(),ERROR_FIRST_NAME_IS_REQUIRED);
+        checkoutYourInformationPage.fillCheckoutUserInfo(user.getFirstName(), "","");
+        Assert.assertEquals(checkoutYourInformationPage.setErrorMessage(),ERROR_LAST_NAME_IS_REQUIRED);
+        checkoutYourInformationPage.fillCheckoutUserInfo(user.getFirstName(), user.getLastName(), "");
+        Assert.assertEquals(checkoutYourInformationPage.setErrorMessage(),ERROR_POSTAL_CODE_IS_REQUIRED);
+        TimeUnit.SECONDS.sleep(2);
+    }
     //    @Test
 //    public void testTest() {
 //
 //
 //    }
 }
+

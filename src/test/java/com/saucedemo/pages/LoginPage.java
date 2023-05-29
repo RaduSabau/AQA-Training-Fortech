@@ -26,6 +26,10 @@ public class LoginPage extends BasePage {
         sendText(passwordField, password);
         jsClick(loginButton);
         log.info("Logged in with {} | {}. {}", username, password, getErrorMessage());
+        if(!getErrorMessage().isEmpty()){
+            highlight(driver,findElement(errorMessage));
+            takeScreenShot();
+        }
     }
 
     public String getErrorMessage() {
