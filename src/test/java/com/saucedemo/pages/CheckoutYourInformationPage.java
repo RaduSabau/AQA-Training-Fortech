@@ -1,7 +1,7 @@
 package com.saucedemo.pages;
 
+import com.saucedemo.constants.Constants;
 import com.saucedemo.test.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,7 +27,5 @@ public class CheckoutYourInformationPage extends BasePage {
         sendText(postalCodeField, zipOrPostCode);
         click(continueButton);
     }
-    public String setErrorMessage(){
-       return new LoginPage(driver).getErrorMessage();
-    }
+
 }

@@ -9,14 +9,14 @@ public class MainPage {
     protected WebDriver driver;
     private BrowserReader browserReader;
 
-    @BeforeTest
+    @BeforeMethod
     public void setup() {
         browserReader = new BrowserReader("chrome");
         driver = browserReader.getDriver();
         driver.get(Constants.MAIN_SAUCEDEMO_URL);
     }
 
-    @AfterTest
+    @AfterMethod
     public void close() {
         if (browserReader != null) {
             browserReader.quit();

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+
 @Slf4j
 public class LoginPage extends BasePage {
     private final By errorMessage = By.xpath("//*[@data-test=\"error\"]");
@@ -26,8 +27,8 @@ public class LoginPage extends BasePage {
         sendText(passwordField, password);
         jsClick(loginButton);
         log.info("Logged in with {} | {}. {}", username, password, getErrorMessage());
-        if(!getErrorMessage().isEmpty()){
-            highlight(driver,findElement(errorMessage));
+        if (!getErrorMessage().isEmpty()) {
+            highlight(driver, findElement(errorMessage));
             takeScreenShot();
         }
     }
@@ -38,4 +39,6 @@ public class LoginPage extends BasePage {
         }
         return "";
     }
+
+
 }
